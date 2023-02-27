@@ -7,8 +7,8 @@ Melander Samuel
 package labb6.generalSimulator;
 
 public abstract class Event {
-    private int time;
-    private EventQueue eventQueue;
+    protected int time;
+    protected EventQueue eventQueue;
 
     public Event(EventQueue eventQueue, int time){
         this.eventQueue = eventQueue;
@@ -23,9 +23,5 @@ public abstract class Event {
     }
     public void addToQueue(Event e) {
         eventQueue.addEvent(e);
-    }
-
-    public EventQueue getEventQueue() {
-        return eventQueue;
     }
 }
