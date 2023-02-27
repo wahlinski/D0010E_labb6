@@ -21,7 +21,11 @@ public abstract class Event {
     public int getTime(){
         return this.time;
     }
-    public void addToQueue(){
-        
+    public void addToQueue(Event e) {
+        eventQueue.addEvent(e);
+    }
+
+    public EventQueue getEventQueue() {
+        return eventQueue;
     }
 }
