@@ -27,8 +27,21 @@ public class ShopView extends View{
 
     }
 
-    public void normalPrinter(){
 
+    public void normalPrinter(){
+        System.out.println("INSERT: currentTime," +
+                " eventName," +
+                " customerNumber," +
+                " om det är öppet eller stängt, " +
+                "antal lediga kassor," +
+                " summa tid kassor varit lediga, " +
+                "antal kunder inne i snabbköpet," +
+                " antal kunder som handlat," +
+                "antal missade kunder," +
+                " antal kunder som köat, " +
+                " summa tid kunder stått i kundkön," +
+                " kassaköns längd hela kassakön, där det för varje par av kunder gäller att den som står till" +
+                "vänster har stått längre i kön än den som står till höger. ");
 
     }
 
