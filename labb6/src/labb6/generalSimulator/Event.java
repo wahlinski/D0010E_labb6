@@ -8,9 +8,10 @@ public abstract class Event {
         this.eventQueue = eventQueue;
         this.time = time;
     }
-    public void execute(){
-
+    public void execute(State state) {
+        state.update();
     }
+
     public int getTime(){
         return this.time;
     }
