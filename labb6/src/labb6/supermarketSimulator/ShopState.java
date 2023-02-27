@@ -69,6 +69,18 @@ public class ShopState extends State {
         unusedRegisters += 1;
     }
 
+    public int getMaxRegisters() {
+        return maxRegisters;
+    }
+
+    public int getMaxPeopleInStore() {
+        return maxPeopleInStore;
+    }
+
+    public int getPeopleInStore() {
+        return peopleInStore;
+    }
+
     public void addPersonMissed() {
         peopleMissed += 1;
     }
