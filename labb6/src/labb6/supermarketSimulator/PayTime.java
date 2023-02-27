@@ -1,5 +1,5 @@
 package labb6.supermarketSimulator;
 
-public class payTime {
+public class PayTime {
     
 }
