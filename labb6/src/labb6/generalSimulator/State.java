@@ -22,7 +22,7 @@ public abstract class State extends Observable{
     public void setTime(){
 
     }
-    public Boolean isStopped(){
+    public boolean isStopped(){
         return this.stopped;
     }
     public abstract void begin();
