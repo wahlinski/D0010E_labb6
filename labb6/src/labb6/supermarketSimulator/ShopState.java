@@ -31,36 +31,50 @@ public class ShopState extends State {
 
     }
 
-    public void stop() {
-
-    }
-
     public boolean isOpen() {
-        return false;
+        return storeOpened;
     }
 
     public void closeShop() {
-
+        storeOpened = false;
     }
 
-    public void openRegister() {
-
+    /**
+     *
+     * @return mängden tillgängliga kassor
+     */
+    public int openRegisters() {
+        return unusedRegisters;
     }
 
+    /**
+     * <p><b>viktigt!</b> kolla så det finns tillgängliga kassor</p>
+     */
     public void occupyRegister() {
+        if (unusedRegisters < 1) {
+            throw new RuntimeException("finns inga fria kassor, använd openRegisters() före");
+        }
 
+        unusedRegisters -= 1;
     }
 
+    /**
+     * <p><b>viktigt!</b> kolla så alla kassor är oanvända redan</p>
+     */
     public void freeUpRegister() {
+        if (unusedRegisters >= maxRegisters) {
+            throw new RuntimeException("kan inte fria en ny kassa eftersom alla är oanvända");
+        }
 
+        unusedRegisters += 1;
     }
 
     public void addPersonMissed() {
-
+        peopleMissed += 1;
     }
 
     public void addPersonPaid() {
-
+        peoplePaid += 1;
     }
 
     public int getPeoplePaid() {
@@ -92,10 +106,18 @@ public class ShopState extends State {
     }
 
     public void addTimeRegistersUnused(int time) {
+        if (time < 0) {
+            throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");
+        }
 
+        timeRegistersNotUsed += time;
     }
 
     public void addTimeInQueue(int time) {
+        if (time < 0) {
+            throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
+        }
 
+        timeInQueue += time;
     }
 }

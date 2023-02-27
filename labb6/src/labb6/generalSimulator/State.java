@@ -19,14 +19,20 @@ public abstract class State extends Observable{
     public int getTime(){
         return this.currentTime;
     }
-    public void setTime(){
+    public void setTime(int time) {
+        if (time < getTime()) {
+            throw new RuntimeException("kan inte gå back i tiden");
+        }
 
+        currentTime = time;
     }
     public boolean isStopped(){
         return this.stopped;
     }
     public abstract void begin();
-    public abstract void stop();
+    public void stop() {
+        stopped = true;
+    }
 
     public void update() {
         setChanged();
