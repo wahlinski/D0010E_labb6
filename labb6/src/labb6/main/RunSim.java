@@ -1,3 +1,9 @@
+/*
+Wåhlin Filip
+Abdi Abdi Mohamed
+Härdelin Viggo
+Melander Samuel
+ */
 package labb6.main;
 
 import labb6.generalSimulator.EventQueue;
