@@ -101,8 +101,8 @@ public class ShopState extends State {
         return customerQueue;
     }
 
-    public void addCustomer() {
-
+    public int addCustomer() {
+        return idGenerator.getNewID();
     }
 
     public int getArrivalTime() {

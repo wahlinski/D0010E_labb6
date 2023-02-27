@@ -20,7 +20,9 @@ public class ShopOpenEvent extends StartEvent {
     @Override
     public void execute(State state) {
         super.execute(state);
-        EventQueue queue = getEventQueue();
-//        CustomerArrivesEvent e = new CustomerArrivesEvent(queue, ); fixa klart då vi har tidsklasserna
+        if (state instanceof ShopState shopState) {
+            CustomerArrivesEvent e = new CustomerArrivesEvent(eventQueue, shopState.getArrivalTime(), shopState.addCustomer());
+            eventQueue.addEvent(e);
+        }
     }
 }

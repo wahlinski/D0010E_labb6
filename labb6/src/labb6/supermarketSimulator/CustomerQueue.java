@@ -1,3 +1,4 @@
+package labb6.supermarketSimulator;
 /*
 Wåhlin Filip
 Abdi Abdi Mohamed
@@ -6,9 +7,8 @@ Melander Samuel
  */
 import java.util.ArrayList;
 
-package labb6.supermarketSimulator;
 
-public class CustomerQueue extends ArrayList{
+public class CustomerQueue extends ArrayList<Integer> {
     public CustomerQueue(){
         super();
     }
@@ -20,7 +20,7 @@ public class CustomerQueue extends ArrayList{
     }
     public void removeFirst(){
         if(this.size() != 0){
-            this.remove(0)
+            this.remove(0);
         }
     }
 }
