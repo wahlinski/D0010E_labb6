@@ -7,6 +7,7 @@ Melander Samuel
 package labb6.main;
 
 import labb6.generalSimulator.EventQueue;
+import labb6.supermarketSimulator.ShopState;
 
 public class RunSim {
     private EventQueue eventQueue;

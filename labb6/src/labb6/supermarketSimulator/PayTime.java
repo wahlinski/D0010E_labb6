@@ -6,6 +6,6 @@ Melander Samuel
  */
 package labb6.supermarketSimulator;
 
-public class arrivalTime {
+public class PayTime {
     
 }
