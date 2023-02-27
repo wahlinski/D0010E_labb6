@@ -21,8 +21,8 @@ public class ShopState extends State {
     private ArrivalTime arrivalTime;
     private PickTime pickTime;
     private PayTime payTime;
-    private int timeRegistersNotUsed;
-    private int timeInQueue;
+    private double timeRegistersNotUsed;
+    private double timeInQueue;
 
     public ShopState(int maxPeople, int maxRegisters) {
 
@@ -105,19 +105,19 @@ public class ShopState extends State {
         return idGenerator.getNewID();
     }
 
-    public int getArrivalTime() {
-        return 0;
+    public double getArrivalTime() {
+        return arrivalTime.calculate(getTime());
     }
 
-    public int getPickTime() {
-        return 0;
+    public double getPickTime() {
+        return pickTime.calculate(getTime());
     }
 
-    public int getPayTime() {
-        return 0;
+    public double getPayTime() {
+        return payTime.calculate(getTime());
     }
 
-    public void addTimeRegistersUnused(int time) {
+    public void addTimeRegistersUnused(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");
         }
@@ -125,7 +125,7 @@ public class ShopState extends State {
         timeRegistersNotUsed += time;
     }
 
-    public void addTimeInQueue(int time) {
+    public void addTimeInQueue(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
         }

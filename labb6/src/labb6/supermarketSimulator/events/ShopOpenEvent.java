@@ -13,7 +13,7 @@ import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
 
 public class ShopOpenEvent extends StartEvent {
-    public ShopOpenEvent(EventQueue eventQueue, int time) {
+    public ShopOpenEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 

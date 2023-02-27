@@ -11,7 +11,7 @@ import labb6.generalSimulator.EventQueue;
 import labb6.generalSimulator.State;
 
 public class ShopCloseEvent extends Event {
-    public ShopCloseEvent(EventQueue eventQueue, int time) {
+    public ShopCloseEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 

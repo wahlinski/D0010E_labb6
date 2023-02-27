@@ -10,7 +10,7 @@ import labb6.generalSimulator.EventQueue;
 import labb6.supermarketSimulator.ShopState;
 
 public class CustomerArrivesEvent extends CustomerEvent {
-    public CustomerArrivesEvent(EventQueue eventQueue, int time, int customerID) {
+    public CustomerArrivesEvent(EventQueue eventQueue, double time, int customerID) {
         super(eventQueue, time, customerID);
     }
 
@@ -18,5 +18,4 @@ public class CustomerArrivesEvent extends CustomerEvent {
     public void execute(ShopState state) {
 
     }
-    private CustomerArrivesEvent
 }

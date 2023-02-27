@@ -1,7 +1,7 @@
 package labb6.generalSimulator;
 
 public class StopEvent extends Event{
-    public StopEvent(EventQueue eventQueue, int time) {
+    public StopEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 

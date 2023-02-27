@@ -23,7 +23,7 @@ public class ArrivalTime {
      * @param currentTime den nuvarande tiden i state
      * @return absoluta tiden som händelsen kommer att hända
      */
-    public double calculate(int currentTime) {
+    public double calculate(double currentTime) {
         return currentTime + rand.next();
     }
 

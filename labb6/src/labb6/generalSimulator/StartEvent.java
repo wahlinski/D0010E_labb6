@@ -2,7 +2,7 @@ package labb6.generalSimulator;
 
 public class StartEvent extends Event {
 
-    public StartEvent(EventQueue eventQueue, int time) {
+    public StartEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 

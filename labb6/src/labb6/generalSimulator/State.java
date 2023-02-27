@@ -10,16 +10,16 @@ import java.util.Observable;
 
 @SuppressWarnings("deprecation")
 public abstract class State extends Observable{
-    private int currentTime;
+    private double currentTime;
     private boolean stopped;
 
     public State(){
 
     }
-    public int getTime(){
+    public double getTime(){
         return this.currentTime;
     }
-    public void setTime(int time) {
+    public void setTime(double time) {
         if (time < getTime()) {
             throw new RuntimeException("kan inte gå back i tiden");
         }

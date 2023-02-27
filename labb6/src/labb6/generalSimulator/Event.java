@@ -7,10 +7,10 @@ Melander Samuel
 package labb6.generalSimulator;
 
 public abstract class Event {
-    protected int time;
+    protected double time;
     protected EventQueue eventQueue;
 
-    public Event(EventQueue eventQueue, int time){
+    public Event(EventQueue eventQueue, double time){
         this.eventQueue = eventQueue;
         this.time = time;
     }
@@ -18,7 +18,7 @@ public abstract class Event {
         state.update();
     }
 
-    public int getTime(){
+    public double getTime(){
         return this.time;
     }
     public void addToQueue(Event e) {

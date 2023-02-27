@@ -11,8 +11,9 @@ import labb6.supermarketSimulator.ShopState;
 
 public class CustomerPayEvent extends CustomerEvent {
 
-    public CustomerPayEvent(EventQueue eventQueue, int time) {
-        super(eventQueue, time);
+
+    public CustomerPayEvent(EventQueue eventQueue, double time, int customerID) {
+        super(eventQueue, time, customerID);
     }
 
     @Override

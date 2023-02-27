@@ -10,8 +10,9 @@ import labb6.generalSimulator.EventQueue;
 import labb6.supermarketSimulator.ShopState;
 
 public class CustomerPickItemsEvent extends CustomerEvent {
-    public CustomerPickItemsEvent(EventQueue eventQueue, int time) {
-        super(eventQueue, time);
+
+    public CustomerPickItemsEvent(EventQueue eventQueue, double time, int customerID) {
+        super(eventQueue, time, customerID);
     }
 
     @Override
