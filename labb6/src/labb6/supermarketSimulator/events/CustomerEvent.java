@@ -18,6 +18,10 @@ public abstract class CustomerEvent extends Event {
         this.customerID = customerID;
     }
 
+    public int getCustomerID() {
+        return customerID;
+    }
+
     @Override
     public void execute(State state) {
         super.execute(state);

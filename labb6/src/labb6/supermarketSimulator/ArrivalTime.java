@@ -12,9 +12,11 @@ public class ArrivalTime {
 
     private final double lambda;
     private final ExponentialRandomStream rand;
+    private final long seed;
 
     public ArrivalTime(double lambda, long seed) {
         this.lambda = lambda;
+        this.seed = seed;
         rand = new ExponentialRandomStream(lambda, seed);
     }
 
@@ -31,4 +33,7 @@ public class ArrivalTime {
         return lambda;
     }
 
+    public long getSeed() {
+        return seed;
+    }
 }

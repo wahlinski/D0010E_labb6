@@ -9,26 +9,38 @@ package labb6.supermarketSimulator;
 import labb6.generalSimulator.State;
 
 public class ShopState extends State {
-    private int peopleInStore;
-    private int maxPeopleInStore;
-    private int peopleMissed;
-    private int peoplePaid;
-    private int maxRegisters;
+    private final int maxPeopleInStore;
+    private final int maxRegisters;
+    private final CustomerQueue customerQueue;
+    private final CustomerIDGenerator idGenerator;
+    private final ArrivalTime arrivalTime;
+    private final PickTime pickTime;
+    private final PayTime payTime;
+    private int peopleInStore = 0;
+    private int peopleMissed = 0;
+    private int peoplePaid = 0;
     private int unusedRegisters;
-    private boolean storeOpened;
-    private CustomerQueue customerQueue;
-    private CustomerIDGenerator idGenerator;
-    private ArrivalTime arrivalTime;
-    private PickTime pickTime;
-    private PayTime payTime;
-    private double timeRegistersNotUsed;
-    private double timeInQueue;
+    private boolean storeOpened = false;
+    private double timeRegistersNotUsed = 0;
+    private double timeInQueue = 0;
 
-    public ShopState(int maxPeople, int maxRegisters) {
+    public ShopState(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed) {
+
+        this.maxRegisters = maxRegisters;
+        this.unusedRegisters = maxRegisters;
+        this.maxPeopleInStore = maxInStore;
+
+        arrivalTime = new ArrivalTime(lambda, seed);
+        pickTime = new PickTime(pMin, pMax, seed);
+        payTime = new PayTime(kMin, kMax, seed);
+
+        customerQueue = new CustomerQueue();
+        idGenerator = new CustomerIDGenerator();
 
     }
-    public void begin() {
 
+    public void begin() {
+        storeOpened = true;
     }
 
     public boolean isOpen() {
@@ -40,7 +52,6 @@ public class ShopState extends State {
     }
 
     /**
-     *
      * @return mängden tillgängliga kassor
      */
     public int openRegisters() {
@@ -59,7 +70,7 @@ public class ShopState extends State {
     }
 
     /**
-     * <p><b>viktigt!</b> kolla så alla kassor är oanvända redan</p>
+     * <p><b>viktigt!</b> kolla så alla kassor inte är öppna redan</p>
      */
     public void freeUpRegister() {
         if (unusedRegisters >= maxRegisters) {
@@ -73,12 +84,35 @@ public class ShopState extends State {
         return maxRegisters;
     }
 
+    public int getAvailableRegisters() {
+        return unusedRegisters;
+    }
+
     public int getMaxPeopleInStore() {
         return maxPeopleInStore;
     }
 
     public int getPeopleInStore() {
         return peopleInStore;
+    }
+
+    public boolean canCustomerGoIn() {
+        return getMaxPeopleInStore() > getPeopleInStore();
+    }
+
+    public void addPeopleInStore() {
+        if (peopleInStore >= maxPeopleInStore) {
+            throw new RuntimeException("för många i butiken");
+        }
+        peopleInStore += 1;
+    }
+
+    public void personLeftStore() {
+        if (peopleInStore <= 0) {
+            throw new RuntimeException("ingen som kan gå ut");
+        }
+
+        peopleInStore -= 1;
     }
 
     public void addPersonMissed() {
@@ -101,7 +135,7 @@ public class ShopState extends State {
         return customerQueue;
     }
 
-    public int addCustomer() {
+    public int createCustomer() {
         return idGenerator.getNewID();
     }
 
@@ -125,11 +159,41 @@ public class ShopState extends State {
         timeRegistersNotUsed += time;
     }
 
+    public double getTimeRegistersNotUsed() {
+        return timeRegistersNotUsed;
+    }
+
     public void addTimeInQueue(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
         }
 
         timeInQueue += time;
+    }
+
+    public double getTimeInQueue() {
+        return timeInQueue;
+    }
+
+
+    public double lambda() {
+        return arrivalTime.getLambda();
+    }
+
+    public double seed() {
+        return arrivalTime.getSeed();
+    }
+
+    public double pMin() {
+        return pickTime.getPMin();
+    }
+    public double pMax() {
+        return pickTime.getPMax();
+    }
+    public double kMin() {
+        return payTime.getKMin();
+    }
+    public double kMax() {
+        return pickTime.getPMax();
     }
 }

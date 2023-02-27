@@ -9,13 +9,14 @@ package labb6.generalSimulator;
 public abstract class Event {
     protected double time;
     protected EventQueue eventQueue;
+    protected String name;
 
     public Event(EventQueue eventQueue, double time){
         this.eventQueue = eventQueue;
         this.time = time;
     }
     public void execute(State state) {
-        state.update();
+        state.update(this);
     }
 
     public double getTime(){
@@ -23,5 +24,12 @@ public abstract class Event {
     }
     public void addToQueue(Event e) {
         eventQueue.addEvent(e);
+    }
+
+    protected void setName(String name) {
+        this.name = name;
+    }
+    public String toString() {
+        return this.name;
     }
 }
