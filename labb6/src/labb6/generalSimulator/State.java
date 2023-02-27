@@ -34,8 +34,8 @@ public abstract class State extends Observable{
         stopped = true;
     }
 
-    public void update() {
+    public void update(Event event) {
         setChanged();
-        notifyObservers();
+        notifyObservers(event);
     }
 }
