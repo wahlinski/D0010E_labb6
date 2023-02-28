@@ -2,8 +2,7 @@ package labb6.generalSimulator;
 
 /**
  * This class inherits Event class. Only responsible for starting an Event
- *
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class StartEvent extends Event {
 

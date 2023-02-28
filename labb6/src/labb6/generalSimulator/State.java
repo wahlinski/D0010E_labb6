@@ -11,7 +11,7 @@ import java.util.Observable;
 /**
  * State is a general class for the simulator to keep track of different states in the simulator.
  *
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 @SuppressWarnings("deprecation")
 public abstract class State extends Observable{

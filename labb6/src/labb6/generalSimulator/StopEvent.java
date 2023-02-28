@@ -2,7 +2,7 @@ package labb6.generalSimulator;
 
 /**
  * This class inherits Event class. Only responsible for stopping an Event
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class StopEvent extends Event{
     /**

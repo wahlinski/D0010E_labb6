@@ -5,11 +5,9 @@ import java.util.Observer;
 /**
  * This class Observes state class and enables a view of state when simulator is running.
  *
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 @SuppressWarnings("deprecation")
-
-
 
 public class View implements Observer{
 

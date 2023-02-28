@@ -3,7 +3,7 @@ package labb6.generalSimulator;
 
 /**
  * This general Event class can be inherited and used to specific events.
- *  @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class Event {
     protected int time;
@@ -13,7 +13,7 @@ public abstract class Event {
      * Instantiates a new Event.
      *
      * @param eventQueue the event queue stored in an Arraylist.
-     * @param time       the time
+     * @param time the time for an event.
      * @throws Error "xxxx"
      */
     public Event(EventQueue eventQueue, int time){
@@ -31,9 +31,9 @@ public abstract class Event {
     }
 
     /**
-     * Get time int.
+     * Gets time for the event.
      *
-     * @return the int
+     * @return the time as an int
      */
     public int getTime(){
         return this.time;

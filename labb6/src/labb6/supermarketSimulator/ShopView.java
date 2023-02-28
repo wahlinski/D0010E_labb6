@@ -1,17 +1,17 @@
-/*
-Wåhlin Filip
-Abdi Abdi Mohamed
-Härdelin Viggo
-Melander Samuel
- */
 package labb6.supermarketSimulator;
-
 import labb6.generalSimulator.View;
 
 import java.util.Observable;
 
+/**
+ * This class Observes Shopstate class and enables a view of ShopState when simulator is running.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ */
 public class ShopView extends View{
 
+    /**
+     * Prints a view of the .......
+     */
     public void viewPrinter(){
         System.out.println("PARAMETRAR");
         System.out.println("========== \n" +
@@ -28,6 +28,9 @@ public class ShopView extends View{
     }
 
 
+    /**
+     * Print multiple times based on the Seed.
+     */
     public void normalPrinter(){
         System.out.println("INSERT: currentTime," +
                 " eventName," +

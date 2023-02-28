@@ -4,7 +4,7 @@ package labb6.generalSimulator;
 /**
  * The simulator is responsible for calling each event's execute method.
  *
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class Simulator{
     private State state;

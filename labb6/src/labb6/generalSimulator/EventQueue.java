@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * This class Event queue  keeps track of the events with an Arraylist.
- * @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class EventQueue extends ArrayList<Event>{
     private int numberOfEvents;
@@ -36,6 +36,7 @@ public class EventQueue extends ArrayList<Event>{
      *
      * @param index the index of the event to be removed
      * @return the event that was removed from the list
+     * @throws IndexOutOfBoundsException  if the index is out of range (index < 0 || index >= size())
      */
     public Event removeEvent(int index){
         return this.remove(index);
@@ -46,6 +47,7 @@ public class EventQueue extends ArrayList<Event>{
      *
      * @param index index of the element to return
      * @return the event at the specified position in this list
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
      */
     public Event getEvent(int index){
         return this.get(index);
