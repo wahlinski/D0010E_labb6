@@ -6,6 +6,7 @@ package labb6.supermarketSimulator;
 import labb6.generalSimulator.Event;
 import labb6.generalSimulator.State;
 import labb6.generalSimulator.StopEvent;
+import labb6.supermarketSimulator.events.CustomerPayEvent;
 
 public class ShopState extends State {
     private final int maxPeopleInStore;
@@ -20,6 +21,7 @@ public class ShopState extends State {
     private int peoplePaid = 0;
     private int peopleQueued = 0;
     private int unusedRegisters;
+    private double lastCustomerPayedTime;
     private boolean storeOpened = false;
     private double timeRegistersNotUsed = 0;
     private double timeInQueue = 0;
@@ -55,6 +57,11 @@ public class ShopState extends State {
         // räkna ut kötid
         int inQueue = customerQueue.size();
         timeInQueue += diffTime * inQueue;
+
+        //
+        if (event instanceof CustomerPayEvent){
+            this.lastCustomerPayedTime = event.getTime();
+        }
 
         super.update(event);
     }
@@ -174,7 +181,9 @@ public class ShopState extends State {
     public double getPayTime() {
         return payTime.calculate(getTime());
     }
-
+    public double getCustomerLastPayedTime(){
+        return this.lastCustomerPayedTime;
+    }
     public void addTimeRegistersUnused(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");

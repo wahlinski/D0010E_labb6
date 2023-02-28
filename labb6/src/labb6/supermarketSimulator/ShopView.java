@@ -76,10 +76,15 @@ public class ShopView extends View{
     }
     public void finalPrint(Observable o, Object arg){
         if (arg instanceof StopEvent){
-            System.out.println("Betalade: " + ((ShopState) o).getPeoplePaid());
-            System.out.println("Missade: " + ((ShopState) o).getPeopleMissed());
-            System.out.println("Tid i kö: " + roundTime(((ShopState) o).getTimeInQueue()));
-            System.out.println("Tid oanvänd: " + roundTime(((ShopState) o).getTimeRegistersNotUsed()));
+            System.out.println("\n1) Av " + Integer.toString(((ShopState) o).getPeoplePaid()+((ShopState) o).getPeopleMissed()) 
+                + " kunder handlade " + ((ShopState) o).getPeoplePaid() + " medan " + ((ShopState) o).getPeopleMissed() + " missades.\n");
+            System.out.println("2) Total tid " + Integer.toString(((ShopState) o).getMaxRegisters()) + " kassor varit lediga: " + roundTime(((ShopState) o).getTimeRegistersNotUsed()) + " te");
+            System.out.println("Genomsnittlig ledig kassatid: " + roundTime((((ShopState) o).getTimeRegistersNotUsed()/((ShopState) o).getMaxRegisters())) 
+                + " te (dvs " + roundTime(((((ShopState) o).getTimeRegistersNotUsed()/((ShopState) o).getMaxRegisters())/ ((ShopState) o).getCustomerLastPayedTime())*100) 
+                + "% av tiden från öppning tills sista kunden betalat). \n");
+            System.out.println("3) Total tid " + Integer.toString(((ShopState) o).getPeopleHaveQueued()) 
+                + " kunder tvingats köa: " + roundTime(((ShopState) o).getTimeInQueue()) 
+                + " te. Genomsnittlig kötid: " + roundTime(((ShopState) o).getTimeInQueue()/((ShopState) o).getPeopleHaveQueued()) + " te. \n");
         }
     }
 
@@ -90,7 +95,7 @@ public class ShopView extends View{
 
         normalPrinter(o, arg); // Denna ska köras värje gång state ändras!
 
-        finalPrint(o, arg);
+        finalPrint(o, arg); // Denna körs en gång efter att när StopEvent triggas.
 
     }
 
