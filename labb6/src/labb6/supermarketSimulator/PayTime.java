@@ -6,7 +6,6 @@ Melander Samuel
  */
 package labb6.supermarketSimulator;
 
-import labb6.util.ExponentialRandomStream;
 import labb6.util.UniformRandomStream;
 
 public class PayTime {
