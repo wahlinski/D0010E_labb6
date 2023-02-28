@@ -8,7 +8,6 @@ Melander Samuel
 package labb6.generalSimulator;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class EventQueue extends ArrayList<Event>{
     private int numberOfEvents;

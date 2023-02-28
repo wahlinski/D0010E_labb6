@@ -7,6 +7,7 @@ Melander Samuel
 package labb6.supermarketSimulator;
 
 import labb6.generalSimulator.Event;
+import labb6.generalSimulator.StopEvent;
 import labb6.generalSimulator.View;
 import labb6.supermarketSimulator.events.CustomerEvent;
 
@@ -16,7 +17,7 @@ import java.util.Observable;
 public class ShopView extends View{
     private boolean firstCall = true;
 
-    public void viewPrinter(ShopState state){
+    private void viewPrinter(ShopState state){
         if (this.firstCall){
             this.firstCall = false;
             System.out.println("PARAMETRAR");
@@ -49,7 +50,7 @@ public class ShopView extends View{
     }
 
 
-    public void normalPrinter(Observable o, Object arg){
+    private void normalPrinter(Observable o, Object arg){
         ShopState state = ((ShopState) o);
         Event event = ((Event) arg);
         String open = "S";
@@ -76,6 +77,14 @@ public class ShopView extends View{
         state.getCustomerQueue().toString());
         System.out.println();
     }
+    public void finalPrint(Observable o, Object arg){
+        if (arg instanceof StopEvent){
+            System.out.println("Betalade: " + ((ShopState) o).getPeoplePaid());
+            System.out.println("Missade: " + ((ShopState) o).getPeopleMissed());
+            System.out.println("Tid i kö: " + roundTime(((ShopState) o).getTimeInQueue()));
+            System.out.println("Tid oanvänd: " + roundTime(((ShopState) o).getTimeRegistersNotUsed()));
+        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -83,6 +92,8 @@ public class ShopView extends View{
         viewPrinter((ShopState) o); //Denna körs bara 1 gång
 
         normalPrinter(o, arg); // Denna ska köras värje gång state ändras!
+
+        finalPrint(o, arg);
 
     }
 
