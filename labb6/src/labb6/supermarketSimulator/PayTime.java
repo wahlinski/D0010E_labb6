@@ -1,9 +1,5 @@
 package labb6.supermarketSimulator;
-import labb6.util.ExponentialRandomStream;
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.supermarketSimulator;
+import labb6.util.UniformRandomStream;
 /**
  * This class calculates PayTime for the customer in the store.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
