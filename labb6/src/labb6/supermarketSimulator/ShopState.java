@@ -8,6 +8,10 @@ import labb6.generalSimulator.State;
 import labb6.generalSimulator.StopEvent;
 import labb6.supermarketSimulator.events.CustomerPayEvent;
 
+/**
+ * This class defines the state of the shop.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ */
 public class ShopState extends State {
     private final int maxPeopleInStore;
     private final int maxRegisters;
@@ -26,6 +30,13 @@ public class ShopState extends State {
     private double timeRegistersNotUsed = 0;
     private double timeInQueue = 0;
 
+    /**
+     * Instantiates a new Shop state.
+     *
+     * @param maxPeople    the max people in the store.
+     * @param maxRegisters the max registers in the store.
+     * @throws IllegalArgumentException if incorrect types are passed through.
+     */
     public ShopState(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed) {
 
         this.maxRegisters = maxRegisters;
@@ -38,7 +49,6 @@ public class ShopState extends State {
 
         customerQueue = new CustomerQueue(this);
         idGenerator = new CustomerIDGenerator();
-
     }
 
     @Override
@@ -70,23 +80,36 @@ public class ShopState extends State {
         storeOpened = true;
     }
 
+    /**
+     * Checks if the store is open.
+     *
+     * @return the boolean
+     */
     public boolean isOpen() {
         return storeOpened;
     }
 
+    /**
+     * Checks if the store is closed.
+     */
     public void closeShop() {
         storeOpened = false;
     }
 
     /**
      * @return mängden tillgängliga kassor
+     * @throws Error store is not open??
      */
     public int openRegisters() {
         return unusedRegisters;
     }
 
     /**
+     * Makes sure that Registers are occupied.
+     *
      * <p><b>viktigt!</b> kolla så det finns tillgängliga kassor</p>
+     *
+     * @throws RuntimeException if the unusedRegisters < 1
      */
     public void occupyRegister() {
         if (unusedRegisters < 1) {
@@ -97,7 +120,9 @@ public class ShopState extends State {
     }
 
     /**
-     * <p><b>viktigt!</b> kolla så alla kassor inte är öppna redan</p>
+     * Opens up new Register
+     * <p><b>viktigt!</b> kolla så alla kassor är oanvända redan</p>
+     * @throws RuntimeException if unusedRegisters >= maxRegisters
      */
     public void freeUpRegister() {
         if (unusedRegisters >= maxRegisters) {
@@ -107,18 +132,35 @@ public class ShopState extends State {
         unusedRegisters += 1;
     }
 
+    /**
+     * Gets max amount of registers.
+     *
+     * @return the max registers
+     */
     public int getMaxRegisters() {
         return maxRegisters;
     }
 
+    /**
+     * Gets maximum people in store.
+     *
+     * @return the max people in store of the type int
+     */
     public int getMaxPeopleInStore() {
         return maxPeopleInStore;
     }
 
+    /**
+     * Gets people in store.
+     *
+     * @return the people in store of the type int
+     */
     public int getPeopleInStore() {
         return peopleInStore;
     }
-
+    /**
+     * Adds person missed.
+     */
     public boolean canCustomerGoIn() {
         return getMaxPeopleInStore() > getPeopleInStore();
     }
@@ -137,15 +179,21 @@ public class ShopState extends State {
 
         peopleInStore -= 1;
     }
-
     public void addPersonMissed() {
         peopleMissed += 1;
     }
 
+    /**
+     * Add person paid.
+     */
     public void addPersonPaid() {
         peoplePaid += 1;
     }
-
+    /**
+     * Gets people paid.
+     *
+     * @return the people paid
+     */
     public void addPeopleHaveQueued() {
         this.peopleQueued++;
     }
@@ -154,18 +202,27 @@ public class ShopState extends State {
         return this.peoplePaid;
     }
 
+    /**
+     * Gets people missed.
+     *
+     * @return the people missed
+     */
     public int getPeopleMissed() {
         return this.peopleMissed;
     }
-
+    
     public int getPeopleHaveQueued() {
         return this.peopleQueued;
     }
 
+    /**
+     * Gets customer queue.
+     *
+     * @return the customer queue
+     */
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
-
     public Customer createCustomer() {
         return new Customer(idGenerator.getNewID());
     }
@@ -191,7 +248,6 @@ public class ShopState extends State {
 
         timeRegistersNotUsed += time;
     }
-
     public double getTimeRegistersNotUsed() {
         return timeRegistersNotUsed;
     }

@@ -10,10 +10,15 @@ import labb6.supermarketSimulator.events.CustomerEvent;
 
 import java.util.Observable;
 
+
+/**
+ * This class Observes Shopstate class and enables a view of ShopState when simulator is running.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ */
 @SuppressWarnings("deprecation")
 public class ShopView extends View{
     private boolean firstCall = true;
-
+    
     private void viewPrinter(ShopState state){
         if (this.firstCall){
             this.firstCall = false;
@@ -45,14 +50,11 @@ public class ShopView extends View{
                     ));
         }
     }
-
-
     private void normalPrinter(Observable o, Object arg){
         ShopState state = ((ShopState) o);
         Event event = ((Event) arg);
         String open = "S";
         if (state.isOpen()){open = "Ö";}
-
         String id = "";
         if (event instanceof CustomerEvent c) {
             id = c.getCustomer().getCustomerID() + "";

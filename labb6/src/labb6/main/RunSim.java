@@ -2,7 +2,6 @@
 * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
 */
 package labb6.main;
-
 import labb6.generalSimulator.EventQueue;
 import labb6.generalSimulator.StopEvent;
 import labb6.supermarketSimulator.ShopSimulator;
@@ -11,11 +10,28 @@ import labb6.supermarketSimulator.ShopView;
 import labb6.supermarketSimulator.events.ShopCloseEvent;
 import labb6.supermarketSimulator.events.ShopOpenEvent;
 
+/**
+ * Runs the specific simulator.
+ *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ */
 @SuppressWarnings("deprecation")
 public class RunSim {
     private EventQueue eventQueue;
     private ShopState state;
-
+    
+    /**
+     * Runs the specific simulator.
+     *
+     * @param m         the m specifies max amount of customers in the store
+     * @param l         the l specifies the ArrivalTime speed lambda
+     * @param pMin      the p Min specifies minimum pickTime
+     * @param pMax      the p max specifies the maximum pickTime
+     * @param kMin      the k min specifies minimum PayTime
+     * @param kMax      the k max specifies maximum PayTime
+     * @param seed      the seed is an array of numbers used by RandomStream
+     * @param closeTime the close time specifies when to close the store
+     * @param stopTime  the stop time specifies when to stop the time ???
+     */
     public RunSim(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed, double closeTime, double stopTime) {
 
         eventQueue = new EventQueue();
@@ -36,6 +52,11 @@ public class RunSim {
         );
 
     }
+    /**
+     * Start simulator.
+     *
+     * @param withView the with view???
+     */
     public ShopState startSimulator(boolean withView) {
         if (withView) {
             ShopView view = new ShopView();
@@ -46,6 +67,13 @@ public class RunSim {
         sim.run();
         return state;
     }
+
+    /**
+     * Main.
+     *
+     * @param args the args
+     *  Prints the whole simulator in different stages???
+     */
     public static void main(String[] args){
         // testkör simulatorexempel 1 ur labbspecen
 
