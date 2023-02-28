@@ -1,13 +1,9 @@
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.supermarketSimulator;
-/*
-Wåhlin Filip
-Abdi Abdi Mohamed
-Härdelin Viggo
-Melander Samuel
- */
+
 import java.util.ArrayList;
-
-
 public class CustomerQueue extends ArrayList<Customer> {
     private ShopState state;
     public CustomerQueue(ShopState state){
