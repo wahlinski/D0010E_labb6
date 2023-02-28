@@ -1,3 +1,7 @@
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
+
 package labb6.generalSimulator;
 import java.util.ArrayList;
 
@@ -7,7 +11,6 @@ import java.util.ArrayList;
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class EventQueue extends ArrayList<Event>{
-    private int numberOfEvents;
 
     /**
      * Instantiates a new Event queue.
@@ -24,11 +27,13 @@ public class EventQueue extends ArrayList<Event>{
      * @throws Error "xxx"
      */
     public void addEvent(Event event){
-        for (int i = 0; i < this.size(); i++){
-            if (event.getTime() < this.get(i).getTime()){
-                this.add(event);
-            }
-        }
+        this.add(event);
+        sort((o1, o2) -> {
+            double x = o1.getTime() - o2.getTime();
+            if (x > 0) return 1;
+            if (x < 0) return -1;
+            return 0;
+        });
     }
 
     /**

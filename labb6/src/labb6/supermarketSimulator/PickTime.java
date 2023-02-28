@@ -1,3 +1,6 @@
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.supermarketSimulator;
 import labb6.util.UniformRandomStream;
 
@@ -30,7 +33,7 @@ public class PickTime {
      * @param currentTime The current time in the state.
      * @return The absolute time the event occurs.
      */
-    public double calculate(int currentTime) {
+    public double calculate(double currentTime) {
         return currentTime + rand.next();
     }
 

@@ -1,4 +1,6 @@
-
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.generalSimulator;
 
 /**
@@ -7,8 +9,8 @@ package labb6.generalSimulator;
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class Simulator{
-    private State state;
-    private EventQueue eventQueue;
+    protected State state;
+    protected EventQueue eventQueue;
 
     /**
      * Instantiates a new simulator.
@@ -35,5 +37,14 @@ public abstract class Simulator{
      * Runs the simulator.
      * @throws Error "XXXX"
      */
-    public abstract void run();
+    public void run() {
+
+        System.out.println("startar simulering " + eventQueue);
+
+        while (!state.isStopped()) {
+            Event e = eventQueue.getEvent(0);
+            eventQueue.removeEvent(0);
+            e.execute(state);
+        }
+    }
 }

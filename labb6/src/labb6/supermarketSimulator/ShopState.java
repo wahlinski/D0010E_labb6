@@ -1,32 +1,34 @@
-/*
-Wåhlin Filip
-Abdi Abdi Mohamed
-Härdelin Viggo
-Melander Samuel
- */
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.supermarketSimulator;
 
+import labb6.generalSimulator.Event;
 import labb6.generalSimulator.State;
+import labb6.generalSimulator.StopEvent;
+import labb6.supermarketSimulator.events.CustomerPayEvent;
 
 /**
  * This class defines the state of the shop.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class ShopState extends State {
-    private int peopleInStore;
-    private int maxPeopleInStore;
-    private int peopleMissed;
-    private int peoplePaid;
-    private int maxRegisters;
+    private final int maxPeopleInStore;
+    private final int maxRegisters;
+    private final CustomerQueue customerQueue;
+    private final ArrivalTime arrivalTime;
+    private final PickTime pickTime;
+    private final PayTime payTime;
+    private final CustomerIDGenerator idGenerator;
+    private int peopleInStore = 0;
+    private int peopleMissed = 0;
+    private int peoplePaid = 0;
+    private int peopleQueued = 0;
     private int unusedRegisters;
-    private boolean storeOpened;
-    private CustomerQueue customerQueue;
-    private CustomerIDGenerator idGenerator;
-    private ArrivalTime arrivalTime;
-    private PickTime pickTime;
-    private PayTime payTime;
-    private int timeRegistersNotUsed;
-    private int timeInQueue;
+    private double lastCustomerPayedTime;
+    private boolean storeOpened = false;
+    private double timeRegistersNotUsed = 0;
+    private double timeInQueue = 0;
 
     /**
      * Instantiates a new Shop state.
@@ -35,11 +37,47 @@ public class ShopState extends State {
      * @param maxRegisters the max registers in the store.
      * @throws IllegalArgumentException if incorrect types are passed through.
      */
-    public ShopState(int maxPeople, int maxRegisters) {
+    public ShopState(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed) {
 
+        this.maxRegisters = maxRegisters;
+        this.unusedRegisters = maxRegisters;
+        this.maxPeopleInStore = maxInStore;
+
+        arrivalTime = new ArrivalTime(lambda, seed);
+        pickTime = new PickTime(pMin, pMax, seed);
+        payTime = new PayTime(kMin, kMax, seed);
+
+        customerQueue = new CustomerQueue(this);
+        idGenerator = new CustomerIDGenerator();
     }
-    public void begin() {
 
+    @Override
+    public void update(Event event) {
+        if(event instanceof StopEvent) { // if (event.getName() == EventName.STOP) {
+            super.update(event);
+            return;
+        }
+
+        double diffTime = event.getTime() - getTime();
+
+        // räkna ut oanvänd kassatid
+        int open = openRegisters();
+        timeRegistersNotUsed += diffTime * open;
+
+        // räkna ut kötid
+        int inQueue = customerQueue.size();
+        timeInQueue += diffTime * inQueue;
+
+        //
+        if (event instanceof CustomerPayEvent){
+            this.lastCustomerPayedTime = event.getTime();
+        }
+
+        super.update(event);
+    }
+
+    public void begin() {
+        storeOpened = true;
     }
 
     /**
@@ -59,8 +97,6 @@ public class ShopState extends State {
     }
 
     /**
-     * Opens registers int.
-     *
      * @return mängden tillgängliga kassor
      * @throws Error store is not open??
      */
@@ -122,10 +158,27 @@ public class ShopState extends State {
     public int getPeopleInStore() {
         return peopleInStore;
     }
-
     /**
      * Adds person missed.
      */
+    public boolean canCustomerGoIn() {
+        return getMaxPeopleInStore() > getPeopleInStore();
+    }
+
+    public void addPeopleInStore() {
+        if (peopleInStore >= maxPeopleInStore) {
+            throw new RuntimeException("för många i butiken");
+        }
+        peopleInStore += 1;
+    }
+
+    public void personLeftStore() {
+        if (peopleInStore <= 0) {
+            throw new RuntimeException("ingen som kan gå ut");
+        }
+
+        peopleInStore -= 1;
+    }
     public void addPersonMissed() {
         peopleMissed += 1;
     }
@@ -136,12 +189,15 @@ public class ShopState extends State {
     public void addPersonPaid() {
         peoplePaid += 1;
     }
-
     /**
      * Gets people paid.
      *
      * @return the people paid
      */
+    public void addPeopleHaveQueued() {
+        this.peopleQueued++;
+    }
+
     public int getPeoplePaid() {
         return this.peoplePaid;
     }
@@ -154,6 +210,10 @@ public class ShopState extends State {
     public int getPeopleMissed() {
         return this.peopleMissed;
     }
+    
+    public int getPeopleHaveQueued() {
+        return this.peopleQueued;
+    }
 
     /**
      * Gets customer queue.
@@ -163,66 +223,70 @@ public class ShopState extends State {
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
-
-    /**
-     * Add customer int.
-     *
-     * @return the int
-     */
-    public int addCustomer() {
-        return idGenerator.getNewID();
+    public Customer createCustomer() {
+        return new Customer(idGenerator.getNewID());
     }
 
-    /**
-     * Gets arrival time.
-     *
-     * @return the arrival time
-     */
-    public int getArrivalTime() {
-        return 0;
+    public double getArrivalTime() {
+        return arrivalTime.calculate(getTime());
     }
 
-    /**
-     * Gets pick time.
-     *
-     * @return the pick time
-     */
-    public int getPickTime() {
-        return 0;
+    public double getPickTime() {
+        return pickTime.calculate(getTime());
     }
 
-    /**
-     * Gets pay time.
-     *
-     * @return the pay time
-     */
-    public int getPayTime() {
-        return 0;
+    public double getPayTime() {
+        return payTime.calculate(getTime());
     }
-
-    /**
-     * Add time registers unused.
-     *
-     * @param time the time
-     */
-    public void addTimeRegistersUnused(int time) {
+    public double getCustomerLastPayedTime(){
+        return this.lastCustomerPayedTime;
+    }
+    public void addTimeRegistersUnused(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");
         }
 
         timeRegistersNotUsed += time;
     }
+    public double getTimeRegistersNotUsed() {
+        return timeRegistersNotUsed;
+    }
 
-    /**
-     * Add time in queue.
-     *
-     * @param time the time
-     */
-    public void addTimeInQueue(int time) {
+    public void addTimeInQueue(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
         }
 
         timeInQueue += time;
     }
+
+    public double getTimeInQueue() {
+        return timeInQueue;
+    }
+
+
+    public double lambda() {
+        return arrivalTime.getLambda();
+    }
+
+    public long seed() {
+        return arrivalTime.getSeed();
+    }
+
+    public double pMin() {
+        return pickTime.getPMin();
+    }
+
+    public double pMax() {
+        return pickTime.getPMax();
+    }
+
+    public double kMin() {
+        return payTime.getKMin();
+    }
+
+    public double kMax() {
+        return pickTime.getPMax();
+    }
+
 }

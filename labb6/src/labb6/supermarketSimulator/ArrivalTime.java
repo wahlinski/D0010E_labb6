@@ -1,9 +1,6 @@
-/*
-Wåhlin Filip
-Abdi Abdi Mohamed
-Härdelin Viggo
-Melander Samuel
- */
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.supermarketSimulator;
 
 import labb6.util.ExponentialRandomStream;
@@ -16,6 +13,7 @@ public class ArrivalTime {
 
     private final double lambda;
     private final ExponentialRandomStream rand;
+    private final long seed;
 
     /**
      * Instantiates a new Arrival time.
@@ -25,6 +23,7 @@ public class ArrivalTime {
      */
     public ArrivalTime(double lambda, long seed) {
         this.lambda = lambda;
+        this.seed = seed;
         rand = new ExponentialRandomStream(lambda, seed);
     }
 
@@ -35,7 +34,7 @@ public class ArrivalTime {
      * @return Returns the absolute time for the event to happen.
      * @throws Error "xxx"
      */
-    public double calculate(int currentTime) {
+    public double calculate(double currentTime) {
         return currentTime + rand.next();
     }
 
@@ -48,4 +47,7 @@ public class ArrivalTime {
         return lambda;
     }
 
+    public long getSeed() {
+        return seed;
+    }
 }

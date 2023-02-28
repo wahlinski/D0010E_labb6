@@ -1,7 +1,9 @@
 package labb6.supermarketSimulator;
 import labb6.util.ExponentialRandomStream;
-import labb6.util.UniformRandomStream;
-
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
+package labb6.supermarketSimulator;
 /**
  * This class calculates PayTime for the customer in the store.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
@@ -30,7 +32,7 @@ public class PayTime {
      * @param currentTime The current time in the state.
      * @return The absolute time the event occurs.
      */
-    public double calculate(int currentTime) {
+    public double calculate(double currentTime) {
         return currentTime + rand.next();
     }
 

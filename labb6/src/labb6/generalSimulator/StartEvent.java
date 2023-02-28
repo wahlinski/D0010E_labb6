@@ -1,3 +1,6 @@
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.generalSimulator;
 
 /**
@@ -13,7 +16,7 @@ public class StartEvent extends Event {
      * @param time       the time
      * @throws Error "xxx"
      */
-    public StartEvent(EventQueue eventQueue, int time) {
+    public StartEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 

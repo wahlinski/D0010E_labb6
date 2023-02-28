@@ -1,13 +1,16 @@
-
-package labb6.generalSimulator;
-
 /**
  * This general Event class can be inherited and used to specific events.
  *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
+
+package labb6.generalSimulator;
+
+import labb6.util.EventName;
+
 public abstract class Event {
-    protected int time;
+    protected double time;
     protected EventQueue eventQueue;
+    protected EventName name;
 
     /**
      * Instantiates a new Event.
@@ -16,7 +19,7 @@ public abstract class Event {
      * @param time the time for an event.
      * @throws Error "xxxx"
      */
-    public Event(EventQueue eventQueue, int time){
+    public Event(EventQueue eventQueue, double time){
         this.eventQueue = eventQueue;
         this.time = time;
     }
@@ -27,15 +30,15 @@ public abstract class Event {
      * @param state the state
      */
     public void execute(State state) {
-        state.update();
+        state.update(this);
     }
-
+    
     /**
      * Gets time for the event.
      *
      * @return the time as an int
      */
-    public int getTime(){
+    public double getTime(){
         return this.time;
     }
 
@@ -46,5 +49,17 @@ public abstract class Event {
      */
     public void addToQueue(Event e) {
         eventQueue.addEvent(e);
+    }
+
+    protected void setName(EventName name) {
+        this.name = name;
+    }
+
+    public EventName getName() {
+        return name;
+    }
+
+    public String toString() {
+        return this.name + "";
     }
 }

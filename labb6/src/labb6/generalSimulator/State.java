@@ -1,9 +1,6 @@
-/*
-Wåhlin Filip
-Abdi Abdi Mohamed
-Härdelin Viggo
-Melander Samuel
- */
+/**
+* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+*/
 package labb6.generalSimulator;
 
 import java.util.Observable;
@@ -15,31 +12,31 @@ import java.util.Observable;
  */
 @SuppressWarnings("deprecation")
 public abstract class State extends Observable{
-    private int currentTime;
+    private double currentTime;
     private boolean stopped;
 
     /**
      * Instantiates a new State.
      */
+     
     public State(){
 
     }
-
-    /**
-     * Get time int.
+    
+     /**
+     * Get time double.
      *
      * @return the int time
      */
-    public int getTime(){
+    public double getTime(){
         return this.currentTime;
     }
-
     /**
      * Sets time.
      *
      * @param time the time
      */
-    public void setTime(int time) {
+    public void setTime(double time) {
         if (time < getTime()) {
             throw new RuntimeException("kan inte gå back i tiden");
         }
@@ -68,13 +65,14 @@ public abstract class State extends Observable{
     public void stop() {
         stopped = true;
     }
-
     /**
      * Update.
      *
      */
-    public void update() {
+    public void update(Event event) {
+        setTime(event.getTime());
+
         setChanged();
-        notifyObservers();
+        notifyObservers(event);
     }
 }
