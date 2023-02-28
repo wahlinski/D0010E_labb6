@@ -50,34 +50,13 @@ public class ShopView extends View{
                     ));
         }
     }
-    private void normalPrinter(Observable o, Object arg){
-        ShopState state = ((ShopState) o);
-        Event event = ((Event) arg);
-        String open = "S";
-        if (state.isOpen()){open = "Ö";}
-        String id = "";
-        if (event instanceof CustomerEvent c) {
-            id = c.getCustomer().getCustomerID() + "";
-        }
-
-        System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
-        roundTime(event.getTime()),
-        event, 
-        id,
-        open, 
-        Integer.toString(state.openRegisters()), 
-        roundTime(state.getTimeRegistersNotUsed()),
-        Integer.toString(state.getPeopleInStore()),
-        Integer.toString(state.getPeoplePaid()),
-        Integer.toString(state.getPeopleMissed()),
-        Integer.toString(state.getPeopleHaveQueued()),
-        roundTime(state.getTimeInQueue()),
-        Integer.toString(state.getCustomerQueue().size()),
-        state.getCustomerQueue().toString());
-        System.out.println();
-    }
-    public void finalPrint(Observable o, Object arg){
+    public void infoPrinter(Observable o, Object arg){
         if (arg instanceof StopEvent){
+            System.out.printf("%-10.10s  %-15.15s",
+                    roundTime(((ShopState) o).getTime()),
+                    "Stop");
+            System.out.println();
+
             System.out.println("\n1) Av " + Integer.toString(((ShopState) o).getPeoplePaid()+((ShopState) o).getPeopleMissed()) 
                 + " kunder handlade " + ((ShopState) o).getPeoplePaid() + " medan " + ((ShopState) o).getPeopleMissed() + " missades.\n");
             System.out.println("2) Total tid " + Integer.toString(((ShopState) o).getMaxRegisters()) 
@@ -88,6 +67,36 @@ public class ShopView extends View{
             System.out.println("3) Total tid " + Integer.toString(((ShopState) o).getPeopleHaveQueued()) 
                 + " kunder tvingats köa: " + roundTime(((ShopState) o).getTimeInQueue()) 
                 + " te. Genomsnittlig kötid: " + roundTime(((ShopState) o).getTimeInQueue()/((ShopState) o).getPeopleHaveQueued()) + " te. \n");
+
+        }
+        else{
+            ShopState state = ((ShopState) o);
+            Event event = ((Event) arg);
+            String open = "S";
+            if (state.isOpen()){open = "Ö";}
+
+            String id = "";
+            if (event instanceof CustomerEvent c) {
+                id = c.getCustomer().getCustomerID() + "";
+            }
+
+
+
+            System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+                    roundTime(event.getTime()),
+                    event,
+                    id,
+                    open,
+                    Integer.toString(state.openRegisters()),
+                    roundTime(state.getTimeRegistersNotUsed()),
+                    Integer.toString(state.getPeopleInStore()),
+                    Integer.toString(state.getPeoplePaid()),
+                    Integer.toString(state.getPeopleMissed()),
+                    Integer.toString(state.getPeopleHaveQueued()),
+                    roundTime(state.getTimeInQueue()),
+                    Integer.toString(state.getCustomerQueue().size()),
+                    state.getCustomerQueue().toString());
+            System.out.println();
         }
     }
 
@@ -96,9 +105,9 @@ public class ShopView extends View{
 
         viewPrinter((ShopState) o); //Denna körs bara 1 gång
 
-        normalPrinter(o, arg); // Denna ska köras värje gång state ändras!
+        //normalPrinter(o, arg); // Denna ska köras värje gång state ändras!
 
-        finalPrint(o, arg); // Denna körs en gång efter att när StopEvent triggas.
+        infoPrinter(o, arg); // Denna körs en gång efter att när StopEvent triggas.
 
     }
 
