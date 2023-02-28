@@ -77,6 +77,7 @@ public class RunSim {
     public static void main(String[] args){
         // testkör simulatorexempel 1 ur labbspecen
 
+        //Värdena är från Håkans, det är de variabler för första körningen av labb-specen.
         RunSim runsim = new RunSim(2, 5, 1.0, 0.5, 1.0, 2.0, 3.0, 1234, 10.0, 999.0);
         runsim.startSimulator(true);
     }
