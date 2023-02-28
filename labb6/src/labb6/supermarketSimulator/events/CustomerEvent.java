@@ -12,10 +12,10 @@ import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
 
 public abstract class CustomerEvent extends Event {
-    protected int customerID;
-    public CustomerEvent(EventQueue eventQueue, double time, int customerID) {
+    protected int customer;
+    public CustomerEvent(EventQueue eventQueue, double time, Customer customer) {
         super(eventQueue, time);
-        this.customerID = customerID;
+        this.customer = customer;
     }
 
     public int getCustomerID() {

@@ -11,8 +11,8 @@ import labb6.supermarketSimulator.ShopState;
 import labb6.util.EventNames;
 
 public class CustomerArrivesEvent extends CustomerEvent {
-    public CustomerArrivesEvent(EventQueue eventQueue, double time, int customerID) {
-        super(eventQueue, time, customerID);
+    public CustomerArrivesEvent(EventQueue eventQueue, double time, Customer customer) {
+        super(eventQueue, time, customer);
         setName(EventNames.ANKOMST + "");
     }
 
@@ -38,7 +38,7 @@ public class CustomerArrivesEvent extends CustomerEvent {
         state.addPeopleInStore();
 
         // Nytt plockevent
-        CustomerPickItemsEvent pickEvent = new CustomerPickItemsEvent(eventQueue, state.getPickTime(), customerID);
+        CustomerPickItemsEvent pickEvent = new CustomerPickItemsEvent(eventQueue, state.getPickTime(), customer);
         eventQueue.addEvent(pickEvent);
     }
 }

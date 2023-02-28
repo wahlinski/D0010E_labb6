@@ -14,8 +14,8 @@ import labb6.util.EventNames;
 public class CustomerPayEvent extends CustomerEvent {
 
 
-    public CustomerPayEvent(EventQueue eventQueue, double time, int customerID) {
-        super(eventQueue, time, customerID);
+    public CustomerPayEvent(EventQueue eventQueue, double time, Customer customer) {
+        super(eventQueue, time, customer);
         setName(EventNames.BETALNING + "");
     }
 
@@ -27,7 +27,7 @@ public class CustomerPayEvent extends CustomerEvent {
 
         CustomerQueue queue = state.getCustomerQueue();
         if(queue.size() > 0) {
-            int customer = queue.first();
+            Customer customer = queue.first();
             queue.removeFirst();
             CustomerPayEvent payEvent = new CustomerPayEvent(eventQueue, state.getPayTime(), customer);
             eventQueue.addEvent(payEvent);

@@ -12,7 +12,6 @@ public class ShopState extends State {
     private final int maxPeopleInStore;
     private final int maxRegisters;
     private final CustomerQueue customerQueue;
-    private final CustomerIDGenerator idGenerator;
     private final ArrivalTime arrivalTime;
     private final PickTime pickTime;
     private final PayTime payTime;
@@ -136,7 +135,7 @@ public class ShopState extends State {
     }
 
     public int createCustomer() {
-        return idGenerator.getNewID();
+        return new Customer(idGenerator.getNewID());
     }
 
     public double getArrivalTime() {
