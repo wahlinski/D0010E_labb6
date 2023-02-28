@@ -6,10 +6,12 @@ Melander Samuel
  */
 package labb6.generalSimulator;
 
+import labb6.util.EventName;
+
 public abstract class Event {
     protected double time;
     protected EventQueue eventQueue;
-    protected String name;
+    protected EventName name;
 
     public Event(EventQueue eventQueue, double time){
         this.eventQueue = eventQueue;
@@ -26,10 +28,15 @@ public abstract class Event {
         eventQueue.addEvent(e);
     }
 
-    protected void setName(String name) {
+    protected void setName(EventName name) {
         this.name = name;
     }
+
+    public EventName getName() {
+        return name;
+    }
+
     public String toString() {
-        return this.name;
+        return this.name + "";
     }
 }

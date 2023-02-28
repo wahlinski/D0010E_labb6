@@ -35,6 +35,8 @@ public abstract class State extends Observable{
     }
 
     public void update(Event event) {
+        setTime(event.getTime());
+
         setChanged();
         notifyObservers(event);
     }

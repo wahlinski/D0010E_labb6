@@ -1,6 +1,6 @@
 package labb6.util;
 
-public enum EventNames {
+public enum EventName {
     START, ANKOMST, PLOCK, BETALNING, STÄNGER, STOP;
 
     @Override

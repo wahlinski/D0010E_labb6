@@ -1,11 +1,11 @@
 package labb6.generalSimulator;
 
-import labb6.util.EventNames;
+import labb6.util.EventName;
 
 public class StopEvent extends Event{
     public StopEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
-        setName(EventNames.STOP + "");
+        setName(EventName.STOP);
     }
 
     @Override

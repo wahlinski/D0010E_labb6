@@ -9,12 +9,12 @@ package labb6.supermarketSimulator.events;
 import labb6.generalSimulator.EventQueue;
 import labb6.supermarketSimulator.Customer;
 import labb6.supermarketSimulator.ShopState;
-import labb6.util.EventNames;
+import labb6.util.EventName;
 
 public class CustomerArrivesEvent extends CustomerEvent {
     public CustomerArrivesEvent(EventQueue eventQueue, double time, Customer customer) {
         super(eventQueue, time, customer);
-        setName(EventNames.ANKOMST + "");
+        setName(EventName.ANKOMST);
     }
 
     @Override
