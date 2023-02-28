@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class Optimize {
     public static void main(String[] args) {
-        metod2(K.SEED);
-        metod3();
+        //metod2(K.SEED);
+        metod3(new Random(K.SEED));
     }
 
     public static ShopState metod1(int maxRegisters, int seed) {
@@ -31,7 +31,7 @@ public class Optimize {
         return r.startSimulator(false);
     }
 
-    public static void metod2(int seed) {
+    public static int[] metod2(int seed) {
         int minRegs = 1;
         int maxRegs = K.M;
 
@@ -52,9 +52,10 @@ public class Optimize {
 
 
 
-        System.out.println("Optimala:");
+        /*System.out.println("Optimala:");
         System.out.println("Kassor: " + res[0]);
-        System.out.println("Missade: " + res[1]);
+        System.out.println("Missade: " + res[1]);*/
+        return new int[] {res[0],res[1]};
     }
 
     private static int[] binarySearch(int seed, int minRegs, int maxRegs, int bestRegs, int bestMissed) {
@@ -66,7 +67,7 @@ public class Optimize {
         // minRegs --- mid --- maxRegs
 
         int missed = state.getPeopleMissed();
-        System.out.println(minRegs + " | " + mid + " | " + maxRegs + " | " + bestRegs + " | " + missed + " | " + bestMissed);
+        //System.out.println(minRegs + " | " + mid + " | " + maxRegs + " | " + bestRegs + " | " + missed + " | " + bestMissed);
         if (maxRegs == mid || minRegs == mid) {
             return new int[] { bestRegs, bestMissed };
         }
@@ -77,7 +78,20 @@ public class Optimize {
         return binarySearch(seed, minRegs, mid, mid, missed);
     }
 
-    public static void metod3() {
+    public static void metod3(Random random) {
+        int counter = 0;
+        int[] first = metod2(random.nextInt());
+        while (counter < 100){
+            int comperable = metod2(random.nextInt())[0];
+            if (first[0] > comperable){
+                counter++;
+                System.out.println(counter);
+            } else {
+                first[0] = comperable;
+                counter = 0;
+            }
+        }
+        System.out.println("Kassor: " + Integer.toString(first[0]) + " Missade kunder: " + Integer.toString(first[1]));
     }
 
 }

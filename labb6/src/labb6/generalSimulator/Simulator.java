@@ -38,9 +38,6 @@ public abstract class Simulator{
      * @throws Error "XXXX"
      */
     public void run() {
-
-        System.out.println("startar simulering " + eventQueue);
-
         while (!state.isStopped()) {
             Event e = eventQueue.getEvent(0);
             eventQueue.removeEvent(0);
