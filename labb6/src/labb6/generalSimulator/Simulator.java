@@ -24,7 +24,6 @@ public abstract class Simulator{
         while (!state.isStopped()) {
             Event e = eventQueue.getEvent(0);
             eventQueue.removeEvent(0);
-            state.setTime(e.getTime());
             e.execute(state);
         }
     }

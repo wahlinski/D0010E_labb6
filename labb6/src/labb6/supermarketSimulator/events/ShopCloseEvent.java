@@ -10,12 +10,12 @@ import labb6.generalSimulator.Event;
 import labb6.generalSimulator.EventQueue;
 import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
-import labb6.util.EventNames;
+import labb6.util.EventName;
 
 public class ShopCloseEvent extends Event {
     public ShopCloseEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
-        setName(EventNames.STÄNGER + "");
+        setName(EventName.STÄNGER);
     }
 
     @Override

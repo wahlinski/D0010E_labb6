@@ -27,10 +27,9 @@ public class ShopView extends View{
                 "Betaltider, [K_min..Kmax]: ["+ Double.toString(state.kMin()) + ".." + Double.toString(state.kMax()) + "]" + "\n" +
                 "Frö, f...................:"+ Long.toString(state.seed()) + "\n\n" +
                 "FÖRLOPP\n" +
-                "=======\n" +
-                "Tid Händelse  Kund  ?  led    ledT    I     $    :-(   köat    köT   köar  [Kassakö..] ");
+                "=======");
 
-            System.out.println(String.format("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s, %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s",
+            System.out.println(String.format("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
                     "Tid",
                     "Händelse",
                     "Kund",
@@ -60,18 +59,18 @@ public class ShopView extends View{
             id = c.getCustomer().getCustomerID() + "";
         }
 
-        System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s",
+        System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
         roundTime(event.getTime()),
         event, 
         id,
         open, 
         Integer.toString(state.openRegisters()), 
-        state.getTimeRegistersNotUsed(), 
+        roundTime(state.getTimeRegistersNotUsed()),
         Integer.toString(state.getPeopleInStore()),
         Integer.toString(state.getPeoplePaid()),
         Integer.toString(state.getPeopleMissed()),
         Integer.toString(state.getPeopleHaveQueued()),
-        Double.toString(state.getTimeInQueue()),
+        roundTime(state.getTimeInQueue()),
         Integer.toString(state.getCustomerQueue().size()),
         state.getCustomerQueue().toString());
         System.out.println();

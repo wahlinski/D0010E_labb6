@@ -10,12 +10,12 @@ import labb6.generalSimulator.EventQueue;
 import labb6.generalSimulator.StartEvent;
 import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
-import labb6.util.EventNames;
+import labb6.util.EventName;
 
 public class ShopOpenEvent extends StartEvent {
     public ShopOpenEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
-        setName(EventNames.START + "");
+        setName(EventName.START);
     }
 
     @Override

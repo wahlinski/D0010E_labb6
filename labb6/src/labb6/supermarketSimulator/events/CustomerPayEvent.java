@@ -10,14 +10,14 @@ import labb6.generalSimulator.EventQueue;
 import labb6.supermarketSimulator.Customer;
 import labb6.supermarketSimulator.CustomerQueue;
 import labb6.supermarketSimulator.ShopState;
-import labb6.util.EventNames;
+import labb6.util.EventName;
 
 public class CustomerPayEvent extends CustomerEvent {
 
 
     public CustomerPayEvent(EventQueue eventQueue, double time, Customer customer) {
         super(eventQueue, time, customer);
-        setName(EventNames.BETALNING + "");
+        setName(EventName.BETALNING);
     }
 
     @Override

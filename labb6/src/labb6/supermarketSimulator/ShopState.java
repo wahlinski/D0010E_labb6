@@ -6,7 +6,9 @@ Melander Samuel
  */
 package labb6.supermarketSimulator;
 
+import labb6.generalSimulator.Event;
 import labb6.generalSimulator.State;
+import labb6.generalSimulator.StopEvent;
 
 public class ShopState extends State {
     private final int maxPeopleInStore;
@@ -38,6 +40,26 @@ public class ShopState extends State {
         customerQueue = new CustomerQueue(this);
         idGenerator = new CustomerIDGenerator();
 
+    }
+
+    @Override
+    public void update(Event event) {
+        if(event instanceof StopEvent) { // if (event.getName() == EventName.STOP) {
+            super.update(event);
+            return;
+        }
+
+        double diffTime = event.getTime() - getTime();
+
+        // räkna ut oanvänd kassatid
+        int open = openRegisters();
+        timeRegistersNotUsed += diffTime * open;
+
+        // räkna ut kötid
+        int inQueue = customerQueue.size();
+        timeInQueue += diffTime * inQueue;
+
+        super.update(event);
     }
 
     public void begin() {
@@ -204,4 +226,5 @@ public class ShopState extends State {
     public double kMax() {
         return pickTime.getPMax();
     }
+
 }
