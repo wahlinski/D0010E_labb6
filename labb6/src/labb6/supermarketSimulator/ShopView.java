@@ -78,7 +78,8 @@ public class ShopView extends View{
         if (arg instanceof StopEvent){
             System.out.println("\n1) Av " + Integer.toString(((ShopState) o).getPeoplePaid()+((ShopState) o).getPeopleMissed()) 
                 + " kunder handlade " + ((ShopState) o).getPeoplePaid() + " medan " + ((ShopState) o).getPeopleMissed() + " missades.\n");
-            System.out.println("2) Total tid " + Integer.toString(((ShopState) o).getMaxRegisters()) + " kassor varit lediga: " + roundTime(((ShopState) o).getTimeRegistersNotUsed()) + " te");
+            System.out.println("2) Total tid " + Integer.toString(((ShopState) o).getMaxRegisters()) 
+                + " kassor varit lediga: " + roundTime(((ShopState) o).getTimeRegistersNotUsed()) + " te");
             System.out.println("Genomsnittlig ledig kassatid: " + roundTime((((ShopState) o).getTimeRegistersNotUsed()/((ShopState) o).getMaxRegisters())) 
                 + " te (dvs " + roundTime(((((ShopState) o).getTimeRegistersNotUsed()/((ShopState) o).getMaxRegisters())/ ((ShopState) o).getCustomerLastPayedTime())*100) 
                 + "% av tiden från öppning tills sista kunden betalat). \n");
