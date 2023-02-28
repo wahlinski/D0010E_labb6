@@ -36,7 +36,7 @@ public class RunSim {
         );
 
     }
-    public void startSimulator(boolean withView) {
+    public ShopState startSimulator(boolean withView) {
         if (withView) {
             ShopView view = new ShopView();
             state.addObserver(view);
@@ -44,6 +44,7 @@ public class RunSim {
 
         ShopSimulator sim = new ShopSimulator(eventQueue, state);
         sim.run();
+        return state;
     }
     public static void main(String[] args){
         // testkör simulatorexempel 1 ur labbspecen
