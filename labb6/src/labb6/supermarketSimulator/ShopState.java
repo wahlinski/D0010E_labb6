@@ -15,6 +15,7 @@ public class ShopState extends State {
     private final ArrivalTime arrivalTime;
     private final PickTime pickTime;
     private final PayTime payTime;
+    private final CustomerIDGenerator idGenerator;
     private int peopleInStore = 0;
     private int peopleMissed = 0;
     private int peoplePaid = 0;
@@ -84,10 +85,6 @@ public class ShopState extends State {
         return maxRegisters;
     }
 
-    public int getAvailableRegisters() {
-        return unusedRegisters;
-    }
-
     public int getMaxPeopleInStore() {
         return maxPeopleInStore;
     }
@@ -122,9 +119,11 @@ public class ShopState extends State {
     public void addPersonPaid() {
         peoplePaid += 1;
     }
-     public void addPeopleHaveQueued(){
+
+    public void addPeopleHaveQueued() {
         this.peopleQueued++;
     }
+
     public int getPeoplePaid() {
         return this.peoplePaid;
     }
@@ -132,14 +131,16 @@ public class ShopState extends State {
     public int getPeopleMissed() {
         return this.peopleMissed;
     }
-    public int getPeopleHaveQueued(){
+
+    public int getPeopleHaveQueued() {
         return this.peopleQueued;
     }
+
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
 
-    public int createCustomer() {
+    public Customer createCustomer() {
         return new Customer(idGenerator.getNewID());
     }
 
@@ -184,19 +185,22 @@ public class ShopState extends State {
         return arrivalTime.getLambda();
     }
 
-    public double seed() {
+    public long seed() {
         return arrivalTime.getSeed();
     }
 
     public double pMin() {
         return pickTime.getPMin();
     }
+
     public double pMax() {
         return pickTime.getPMax();
     }
+
     public double kMin() {
         return payTime.getKMin();
     }
+
     public double kMax() {
         return pickTime.getPMax();
     }
