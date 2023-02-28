@@ -7,7 +7,6 @@ Melander Samuel
 package labb6.main;
 
 import labb6.generalSimulator.EventQueue;
-import labb6.generalSimulator.Simulator;
 import labb6.generalSimulator.StopEvent;
 import labb6.supermarketSimulator.ShopSimulator;
 import labb6.supermarketSimulator.ShopState;
@@ -15,6 +14,7 @@ import labb6.supermarketSimulator.ShopView;
 import labb6.supermarketSimulator.events.ShopCloseEvent;
 import labb6.supermarketSimulator.events.ShopOpenEvent;
 
+@SuppressWarnings("deprecation")
 public class RunSim {
     private EventQueue eventQueue;
     private ShopState state;

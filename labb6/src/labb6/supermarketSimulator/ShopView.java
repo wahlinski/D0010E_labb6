@@ -12,6 +12,7 @@ import labb6.supermarketSimulator.events.CustomerEvent;
 
 import java.util.Observable;
 
+@SuppressWarnings("deprecation")
 public class ShopView extends View{
     private boolean firstCall = true;
 
