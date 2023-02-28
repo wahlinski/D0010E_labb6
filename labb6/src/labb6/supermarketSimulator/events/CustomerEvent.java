@@ -18,8 +18,8 @@ public abstract class CustomerEvent extends Event {
         this.customer = customer;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomer() {
+        return customer;
     }
 
     @Override

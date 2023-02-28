@@ -18,6 +18,7 @@ public class ShopState extends State {
     private int peopleInStore = 0;
     private int peopleMissed = 0;
     private int peoplePaid = 0;
+    private int peopleQueued = 0;
     private int unusedRegisters;
     private boolean storeOpened = false;
     private double timeRegistersNotUsed = 0;
@@ -33,7 +34,7 @@ public class ShopState extends State {
         pickTime = new PickTime(pMin, pMax, seed);
         payTime = new PayTime(kMin, kMax, seed);
 
-        customerQueue = new CustomerQueue();
+        customerQueue = new CustomerQueue(this);
         idGenerator = new CustomerIDGenerator();
 
     }
@@ -121,7 +122,9 @@ public class ShopState extends State {
     public void addPersonPaid() {
         peoplePaid += 1;
     }
-
+     public void addPeopleHaveQueued(){
+        this.peopleQueued++;
+    }
     public int getPeoplePaid() {
         return this.peoplePaid;
     }
@@ -129,7 +132,9 @@ public class ShopState extends State {
     public int getPeopleMissed() {
         return this.peopleMissed;
     }
-
+    public int getPeopleHaveQueued(){
+        return this.peopleQueued;
+    }
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }

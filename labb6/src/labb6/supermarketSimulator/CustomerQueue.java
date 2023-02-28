@@ -9,11 +9,14 @@ import java.util.ArrayList;
 
 
 public class CustomerQueue extends ArrayList<Integer> {
-    public CustomerQueue(){
+    private ShopState state;
+    public CustomerQueue(State state){
         super();
+        this.state = state;
     }
     public void addCustomer(int customer){
         this.add(customer);
+        state.addPeopleHaveQueued();
     }
     public int first(){
         return this.get(0);
