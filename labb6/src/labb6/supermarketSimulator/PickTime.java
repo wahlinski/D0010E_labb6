@@ -15,7 +15,7 @@ public class PickTime {
      *
      * @param pMin the p Min specifies minimum pickTime.
      * @param pMax the p max specifies the maximum pickTime
-     * @param seed the seed is a random integer used to randomize the simulation.
+     * @param seed the seed is a random integer used to randomize the PickTime.
      * @throws IllegalArgumentException if incorrect types are passed through.
      */
     public PickTime(double pMin, double pMax, long seed) {

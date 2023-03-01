@@ -31,13 +31,13 @@ public class ShopState extends State {
      * Instantiates a new Shop state.
      *
      * @param maxRegisters the max registers in the store.
-     * @param maxInStore   the max in store
-     * @param lambda       the lambda
-     * @param pMin         the p min
-     * @param pMax         the p max
-     * @param kMin         the k min
-     * @param kMax         the k max
-     * @param seed         the seed
+     * @param maxInStore   the max customers simultaneously in store.
+     * @param lambda       the lambda parameter indicates the average number of customers arriving per unit of time.
+     * @param pMin         the p min specifies minimum PickTime.
+     * @param pMax         the p max specifies maximum PickTime.
+     * @param kMin         the k min specifies minimum PayTime.
+     * @param kMax         the k max specifies maximum PayTime.
+     * @param seed         the seed is a random integer used to randomize the simulation.
      * @throws IllegalArgumentException if incorrect types are passed through.
      */
     public ShopState(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed) {
@@ -114,7 +114,7 @@ public class ShopState extends State {
      *
      * <p><b>viktigt!</b> kolla så det finns tillgängliga kassor</p>
      *
-     * @throws RuntimeException if the unusedRegisters < 1
+     * @throws RuntimeException if the unusedRegisters {@literal <} 1
      */
     public void occupyRegister() {
         if (unusedRegisters < 1) {
@@ -126,9 +126,8 @@ public class ShopState extends State {
 
     /**
      * Opens up new Register
-     * <p><b>viktigt!</b> kolla så alla kassor är oanvända redan</p>
      *
-     * @throws RuntimeException if unusedRegisters >= maxRegisters
+     * @throws RuntimeException if unusedRegisters {@literal >=} maxRegisters
      */
     public void freeUpRegister() {
         if (unusedRegisters >= maxRegisters) {
@@ -139,7 +138,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets max amount of registers.
+     * Returns maximum amount of registers.
      *
      * @return the max registers
      */
@@ -148,7 +147,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets maximum people in store.
+     * Returns maximum people in store.
      *
      * @return the max people in store of the type int
      */
@@ -157,16 +156,16 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets people in store.
+     * Returns number of people in the store.
      *
-     * @return the people in store of the type int
+     * @return the people in store of the type int.
      */
     public int getPeopleInStore() {
         return peopleInStore;
     }
 
     /**
-     * Adds person missed.
+     * Checks if more people are allowed to enter the store.
      *
      * @return the boolean
      */
@@ -175,7 +174,8 @@ public class ShopState extends State {
     }
 
     /**
-     * Add people in store.
+     * Allows more people to enter the store.
+     * @throws RuntimeException if peopleInStore >= maxPeopleInStore.
      */
     public void addPeopleInStore() {
         if (peopleInStore >= maxPeopleInStore) {
@@ -185,7 +185,8 @@ public class ShopState extends State {
     }
 
     /**
-     * Person left store.
+     * Decreses the number of people in the store.
+     * @throws RuntimeException if peopleInStore {@literal <=} 0
      */
     public void personLeftStore() {
         if (peopleInStore <= 0) {
@@ -196,21 +197,21 @@ public class ShopState extends State {
     }
 
     /**
-     * Add person missed.
+     * Counts the number of people missed.
      */
     public void addPersonMissed() {
         peopleMissed += 1;
     }
 
     /**
-     * Add person paid.
+     * Counts number of people paid.
      */
     public void addPersonPaid() {
         peoplePaid += 1;
     }
 
     /**
-     * Gets people paid.
+     * Counts the number of people queued.
      *
      * @return the people paid
      */
@@ -219,7 +220,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets people paid.
+     * Returns the number of people finished paying.
      *
      * @return the people paid
      */
@@ -228,7 +229,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets people missed.
+     * Returns the number of people missed.
      *
      * @return the people missed
      */
@@ -237,7 +238,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets people have queued.
+     * Returns the number of people who have queued.
      *
      * @return the people have queued
      */
@@ -246,7 +247,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets customer queue.
+     * Returns the customer queue of type ArrayList
      *
      * @return the customer queue
      */
@@ -255,16 +256,16 @@ public class ShopState extends State {
     }
 
     /**
-     * Create customer customer.
+     * Creates a new Customer Object.
      *
-     * @return the customer
+     * @return the customer with a unique CustomerID
      */
     public Customer createCustomer() {
         return new Customer(idGenerator.getNewID());
     }
 
     /**
-     * Gets arrival time.
+     * Returns the calculated ArrivalTime.
      *
      * @return the arrival time
      */
@@ -273,7 +274,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets pick time.
+     * Returns the calculated PickTime.
      *
      * @return the pick time
      */
@@ -282,7 +283,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets pay time.
+     * Returns the calculated PayTime.
      *
      * @return the pay time
      */
@@ -291,7 +292,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Get customer last payed time double.
+     * Returns the last customers' pay time.
      *
      * @return the double
      */
@@ -300,7 +301,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Add time registers unused.
+     * Used to calculate duration of the unused registers.
      *
      * @param time the time
      */
@@ -313,7 +314,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets time registers not used.
+     * Returns the total time of unused registers.
      *
      * @return the time registers not used
      */
@@ -322,7 +323,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Add time in queue.
+     * Used to calculate time spent in the queue.
      *
      * @param time the time
      */
@@ -335,7 +336,7 @@ public class ShopState extends State {
     }
 
     /**
-     * Gets time in queue.
+     * Returns the total time spent in the queue
      *
      * @return the time in queue
      */
@@ -345,16 +346,16 @@ public class ShopState extends State {
 
 
     /**
-     * Lambda double.
+     * Returns the average number of customers arriving per unit of time.
      *
-     * @return the double
+     * @return the double lambda
      */
     public double lambda() {
         return arrivalTime.getLambda();
     }
 
     /**
-     * Seed long.
+     * Returns the random integer used to randomize the simulation for ArrivalTime.
      *
      * @return the long
      */
@@ -363,7 +364,7 @@ public class ShopState extends State {
     }
 
     /**
-     * P min double.
+     * Returns minimum pickTime.
      *
      * @return the double
      */
@@ -372,7 +373,7 @@ public class ShopState extends State {
     }
 
     /**
-     * P max double.
+     * Returns maximum pickTime.
      *
      * @return the double
      */
@@ -381,7 +382,7 @@ public class ShopState extends State {
     }
 
     /**
-     * K min double.
+     * Returns minimum payTime.
      *
      * @return the double
      */
@@ -390,7 +391,7 @@ public class ShopState extends State {
     }
 
     /**
-     * K max double.
+     * Returns maximum payTime.
      *
      * @return the double
      */

@@ -1,6 +1,4 @@
-
 package labb6.util;
-
 import java.util.Random;
 
 

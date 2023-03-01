@@ -1,7 +1,7 @@
 package labb6.supermarketSimulator;
 
 /**
- * This Class generates a Customer id.
+ * This Class generates a Customer id a way of differentiating customers in the store.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class CustomerIDGenerator {
@@ -15,9 +15,9 @@ public class CustomerIDGenerator {
     }
 
     /**
-     * Gets a new customerId.
+     * Gets a new customerID.
      *
-     * @return New CustomerId
+     * @return New CustomerID
      * @throws ArithmeticException if currentId < 0
      */
     public int getNewID(){

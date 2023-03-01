@@ -22,7 +22,7 @@ public abstract class Event {
     }
 
     /**
-     * Execute by chancing the State .
+     * Execute by changing the State .
      *
      * @param state the state
      */

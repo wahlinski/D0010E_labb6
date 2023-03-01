@@ -14,7 +14,7 @@ public class PayTime {
      *
      * @param kMin the k min specifies minimum PayTime.
      * @param kMax the k max specifies maximum PayTime.
-     * @param seed the seed is a random integer used to randomize the simulation.
+     * @param seed the seed is a random integer used to randomize the PayTime.
      */
     public PayTime(double kMin, double kMax, long seed) {
         this.kMin = kMin;

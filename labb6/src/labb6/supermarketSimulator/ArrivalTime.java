@@ -2,7 +2,8 @@ package labb6.supermarketSimulator;
 import labb6.util.ExponentialRandomStream;
 
 /**
- * This class calculates Arrival time for the customers in the store.
+ * This class calculates Arrival time for the customers in the store. Customers are considered to arrive randomly and independently
+ * of each other.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class ArrivalTime {
@@ -14,7 +15,7 @@ public class ArrivalTime {
     /**
      * Instantiates a new Arrival time.
      *
-     * @param lambda the lambda
+     * @param lambda the lambda parameter indicates the average number of customers arriving per unit of time.
      * @param seed   the seed is a random integer used to randomize the simulation.
      */
     public ArrivalTime(double lambda, long seed) {
@@ -42,6 +43,12 @@ public class ArrivalTime {
     public double getLambda() {
         return lambda;
     }
+
+    /**
+     * Returns Seed
+     *
+     * @return the Seed
+     */
 
     public long getSeed() {
         return seed;
