@@ -1,8 +1,4 @@
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
 package labb6.supermarketSimulator;
-
 import labb6.generalSimulator.Event;
 import labb6.generalSimulator.StopEvent;
 import labb6.generalSimulator.View;
@@ -50,6 +46,13 @@ public class ShopView extends View{
                     ));
         }
     }
+
+    /**
+     * Gives statistics for the simulation.
+     *
+     * @param o   the o
+     * @param arg the arg
+     */
     public void infoPrinter(Observable o, Object arg){
         if (arg instanceof StopEvent){
             System.out.printf("%-10.10s  %-15.15s",

@@ -2,7 +2,7 @@ package labb6.util;
 import java.util.Random;
 
 /**
- * This class is used to randomize the ShopSimulator based on seed & lambda.
+ * This class is used to randomize the ShopSimulator based on seed and lambda.
  */
 public class ExponentialRandomStream {
 	

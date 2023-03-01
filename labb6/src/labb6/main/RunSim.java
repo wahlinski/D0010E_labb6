@@ -50,7 +50,7 @@ public class RunSim {
 
     }
     /**
-     * Start simulator.
+     * Starts the simulator.
      *
      * @param withView the with view???
      */
