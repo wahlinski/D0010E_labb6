@@ -1,5 +1,9 @@
 package labb6.util;
 
+/**
+ * The Enumeration EventName handels important Events and makes them more accessible .
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ */
 public enum EventName {
     START, ANKOMST, PLOCK, BETALNING, STÄNGER, STOP;
 
