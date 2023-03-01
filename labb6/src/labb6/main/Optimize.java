@@ -1,19 +1,26 @@
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
 package labb6.main;
-
 import labb6.supermarketSimulator.ShopState;
 import labb6.util.K;
-
 import java.util.Random;
 
+/**
+ * This class is used to run different simulation in order to optimize.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ */
 public class Optimize {
+
     public static void main(String[] args) {
         //metod2(K.SEED);
         metod3(new Random(K.SEED));
     }
 
+    /**
+     * Metod 1 shop state.
+     *
+     * @param maxRegisters the max registers.
+     * @param seed         the seed random integer used to randomize the simulation.
+     * @return the shop state
+     */
     public static ShopState metod1(int maxRegisters, int seed) {
         RunSim r = new RunSim(
                 maxRegisters,
@@ -31,6 +38,12 @@ public class Optimize {
         return r.startSimulator(false);
     }
 
+    /**
+     * Metod 2 int [ ].
+     *
+     * @param seed the seed
+     * @return the int [ ]
+     */
     public static int[] metod2(int seed) {
         int minRegs = 1;
         int maxRegs = K.M;
@@ -78,6 +91,11 @@ public class Optimize {
         return binarySearch(seed, minRegs, mid, mid, missed);
     }
 
+    /**
+     * Metod 3.
+     *
+     * @param random the random
+     */
     public static void metod3(Random random) {
         int counter = 0;
         int[] first = metod2(random.nextInt());

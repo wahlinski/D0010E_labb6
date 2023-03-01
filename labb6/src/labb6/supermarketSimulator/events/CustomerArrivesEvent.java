@@ -19,7 +19,7 @@ public class CustomerArrivesEvent extends CustomerEvent {
      *
      * @param eventQueue the event queue
      * @param time       the time
-     * @param customerID the customer id
+     * @param customer   the customer
      */
     public CustomerArrivesEvent(EventQueue eventQueue, double time, Customer customer) {
         super(eventQueue, time, customer);
