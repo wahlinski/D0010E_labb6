@@ -12,7 +12,7 @@ import labb6.supermarketSimulator.ShopState;
 /**
  * This inherits the general Event class and creates a specific event for customers.
  *
- *  @Author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class CustomerEvent extends Event {
     protected Customer customer;

@@ -9,7 +9,16 @@ import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
 import labb6.util.EventName;
 
+/**
+ * This class keeps track of when the store is open.
+ */
 public class ShopOpenEvent extends StartEvent {
+    /**
+     * Instantiates a new Shop open event.
+     *
+     * @param eventQueue the event queue
+     * @param time       the time
+     */
     public ShopOpenEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
         setName(EventName.START);

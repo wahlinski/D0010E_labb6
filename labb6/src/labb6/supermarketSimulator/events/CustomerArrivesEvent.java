@@ -9,7 +9,9 @@ import labb6.util.EventName;
 
 
 /**
- * This class creates a new Customer event .
+ * This keeps track of when customer arrives to the store.
+ *@author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
+ *
  */
 public class CustomerArrivesEvent extends CustomerEvent {
     /**

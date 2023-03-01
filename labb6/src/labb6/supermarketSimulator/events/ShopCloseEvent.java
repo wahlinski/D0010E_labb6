@@ -1,15 +1,22 @@
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
 package labb6.supermarketSimulator.events;
-
 import labb6.generalSimulator.Event;
 import labb6.generalSimulator.EventQueue;
 import labb6.generalSimulator.State;
 import labb6.supermarketSimulator.ShopState;
 import labb6.util.EventName;
 
+/**
+ * This class keeps track of when the store is closed.
+ *
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
 public class ShopCloseEvent extends Event {
+    /**
+     * Instantiates a new Shop close event.
+     *
+     * @param eventQueue the event queue
+     * @param time       the time
+     */
     public ShopCloseEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
         setName(EventName.STÄNGER);
