@@ -1,8 +1,4 @@
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
 package labb6.supermarketSimulator;
-
 import labb6.generalSimulator.Event;
 import labb6.generalSimulator.State;
 import labb6.generalSimulator.StopEvent;
@@ -10,6 +6,7 @@ import labb6.supermarketSimulator.events.CustomerPayEvent;
 
 /**
  * This class defines the state of the shop.
+ *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class ShopState extends State {
@@ -33,8 +30,14 @@ public class ShopState extends State {
     /**
      * Instantiates a new Shop state.
      *
-     * @param maxPeople    the max people in the store.
      * @param maxRegisters the max registers in the store.
+     * @param maxInStore   the max in store
+     * @param lambda       the lambda
+     * @param pMin         the p min
+     * @param pMax         the p max
+     * @param kMin         the k min
+     * @param kMax         the k max
+     * @param seed         the seed
      * @throws IllegalArgumentException if incorrect types are passed through.
      */
     public ShopState(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed) {
@@ -97,6 +100,8 @@ public class ShopState extends State {
     }
 
     /**
+     * Open registers int.
+     *
      * @return mängden tillgängliga kassor
      * @throws Error store is not open??
      */
@@ -122,6 +127,7 @@ public class ShopState extends State {
     /**
      * Opens up new Register
      * <p><b>viktigt!</b> kolla så alla kassor är oanvända redan</p>
+     *
      * @throws RuntimeException if unusedRegisters >= maxRegisters
      */
     public void freeUpRegister() {
@@ -158,13 +164,19 @@ public class ShopState extends State {
     public int getPeopleInStore() {
         return peopleInStore;
     }
+
     /**
      * Adds person missed.
+     *
+     * @return the boolean
      */
     public boolean canCustomerGoIn() {
         return getMaxPeopleInStore() > getPeopleInStore();
     }
 
+    /**
+     * Add people in store.
+     */
     public void addPeopleInStore() {
         if (peopleInStore >= maxPeopleInStore) {
             throw new RuntimeException("för många i butiken");
@@ -172,6 +184,9 @@ public class ShopState extends State {
         peopleInStore += 1;
     }
 
+    /**
+     * Person left store.
+     */
     public void personLeftStore() {
         if (peopleInStore <= 0) {
             throw new RuntimeException("ingen som kan gå ut");
@@ -179,6 +194,10 @@ public class ShopState extends State {
 
         peopleInStore -= 1;
     }
+
+    /**
+     * Add person missed.
+     */
     public void addPersonMissed() {
         peopleMissed += 1;
     }
@@ -189,6 +208,7 @@ public class ShopState extends State {
     public void addPersonPaid() {
         peoplePaid += 1;
     }
+
     /**
      * Gets people paid.
      *
@@ -198,6 +218,11 @@ public class ShopState extends State {
         this.peopleQueued++;
     }
 
+    /**
+     * Gets people paid.
+     *
+     * @return the people paid
+     */
     public int getPeoplePaid() {
         return this.peoplePaid;
     }
@@ -210,7 +235,12 @@ public class ShopState extends State {
     public int getPeopleMissed() {
         return this.peopleMissed;
     }
-    
+
+    /**
+     * Gets people have queued.
+     *
+     * @return the people have queued
+     */
     public int getPeopleHaveQueued() {
         return this.peopleQueued;
     }
@@ -223,24 +253,57 @@ public class ShopState extends State {
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
+
+    /**
+     * Create customer customer.
+     *
+     * @return the customer
+     */
     public Customer createCustomer() {
         return new Customer(idGenerator.getNewID());
     }
 
+    /**
+     * Gets arrival time.
+     *
+     * @return the arrival time
+     */
     public double getArrivalTime() {
         return arrivalTime.calculate(getTime());
     }
 
+    /**
+     * Gets pick time.
+     *
+     * @return the pick time
+     */
     public double getPickTime() {
         return pickTime.calculate(getTime());
     }
 
+    /**
+     * Gets pay time.
+     *
+     * @return the pay time
+     */
     public double getPayTime() {
         return payTime.calculate(getTime());
     }
+
+    /**
+     * Get customer last payed time double.
+     *
+     * @return the double
+     */
     public double getCustomerLastPayedTime(){
         return this.lastCustomerPayedTime;
     }
+
+    /**
+     * Add time registers unused.
+     *
+     * @param time the time
+     */
     public void addTimeRegistersUnused(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");
@@ -248,10 +311,21 @@ public class ShopState extends State {
 
         timeRegistersNotUsed += time;
     }
+
+    /**
+     * Gets time registers not used.
+     *
+     * @return the time registers not used
+     */
     public double getTimeRegistersNotUsed() {
         return timeRegistersNotUsed;
     }
 
+    /**
+     * Add time in queue.
+     *
+     * @param time the time
+     */
     public void addTimeInQueue(double time) {
         if (time < 0) {
             throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
@@ -260,31 +334,66 @@ public class ShopState extends State {
         timeInQueue += time;
     }
 
+    /**
+     * Gets time in queue.
+     *
+     * @return the time in queue
+     */
     public double getTimeInQueue() {
         return timeInQueue;
     }
 
 
+    /**
+     * Lambda double.
+     *
+     * @return the double
+     */
     public double lambda() {
         return arrivalTime.getLambda();
     }
 
+    /**
+     * Seed long.
+     *
+     * @return the long
+     */
     public long seed() {
         return arrivalTime.getSeed();
     }
 
+    /**
+     * P min double.
+     *
+     * @return the double
+     */
     public double pMin() {
         return pickTime.getPMin();
     }
 
+    /**
+     * P max double.
+     *
+     * @return the double
+     */
     public double pMax() {
         return pickTime.getPMax();
     }
 
+    /**
+     * K min double.
+     *
+     * @return the double
+     */
     public double kMin() {
         return payTime.getKMin();
     }
 
+    /**
+     * K max double.
+     *
+     * @return the double
+     */
     public double kMax() {
         return pickTime.getPMax();
     }

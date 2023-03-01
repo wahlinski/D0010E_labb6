@@ -1,7 +1,7 @@
 package labb6.supermarketSimulator;
 import labb6.util.UniformRandomStream;
 /**
- * This class calculates PayTime for the customer in the store.
+ * This class is used for calculating the PayTime for the customers in the simulation.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class PayTime {

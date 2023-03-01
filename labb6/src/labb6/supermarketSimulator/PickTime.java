@@ -1,11 +1,8 @@
-/**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
 package labb6.supermarketSimulator;
 import labb6.util.UniformRandomStream;
 
 /**
- * The type Pick time.
+ * This class is used for calculating the PickTime for the customers in the simulation.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class PickTime {
