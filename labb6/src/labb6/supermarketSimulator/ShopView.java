@@ -1,8 +1,10 @@
 package labb6.supermarketSimulator;
 import labb6.generalSimulator.Event;
+import labb6.generalSimulator.StartEvent;
 import labb6.generalSimulator.StopEvent;
 import labb6.generalSimulator.View;
 import labb6.supermarketSimulator.events.CustomerEvent;
+import labb6.supermarketSimulator.events.ShopCloseEvent;
 
 import java.util.Observable;
 
@@ -84,6 +86,7 @@ public class ShopView extends View{
                 + " t.e. \n");
 
         }
+
         else{
             ShopState state = ((ShopState) o);
             Event event = ((Event) arg);
@@ -94,22 +97,49 @@ public class ShopView extends View{
             if (event instanceof CustomerEvent c) {
                 id = c.getCustomer().getCustomerID() + "";
             }
+            //Detta krävs då Det krävs en specifik println när händelsen är ShopCloseEvent (Den ska ej printa ut en customerID).
+            if(arg instanceof ShopCloseEvent){
+                System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+                        roundTime(event.getTime()),
+                        event,
+                        "---",
+                        open,
+                        Integer.toString(state.openRegisters()),
+                        roundTime(state.getTimeRegistersNotUsed()),
+                        Integer.toString(state.getPeopleInStore()),
+                        Integer.toString(state.getPeoplePaid()),
+                        Integer.toString(state.getPeopleMissed()),
+                        Integer.toString(state.getPeopleHaveQueued()),
+                        roundTime(state.getTimeInQueue()),
+                        Integer.toString(state.getCustomerQueue().size()),
+                        state.getCustomerQueue().toString());
+                System.out.println();
+            }
+            else if(arg instanceof StartEvent){
+                System.out.printf("%-10.10s  %-17.14s",
+                        roundTime(event.getTime()),
+                        "Start"
+                        );
+                System.out.println();
+            }
 
-            System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
-                    roundTime(event.getTime()),
-                    event,
-                    id,
-                    open,
-                    Integer.toString(state.openRegisters()),
-                    roundTime(state.getTimeRegistersNotUsed()),
-                    Integer.toString(state.getPeopleInStore()),
-                    Integer.toString(state.getPeoplePaid()),
-                    Integer.toString(state.getPeopleMissed()),
-                    Integer.toString(state.getPeopleHaveQueued()),
-                    roundTime(state.getTimeInQueue()),
-                    Integer.toString(state.getCustomerQueue().size()),
-                    state.getCustomerQueue().toString());
-            System.out.println();
+            else {
+                System.out.printf("%-10.10s  %-17.14s %-8.11s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+                        roundTime(event.getTime()),
+                        event,
+                        id,
+                        open,
+                        Integer.toString(state.openRegisters()),
+                        roundTime(state.getTimeRegistersNotUsed()),
+                        Integer.toString(state.getPeopleInStore()),
+                        Integer.toString(state.getPeoplePaid()),
+                        Integer.toString(state.getPeopleMissed()),
+                        Integer.toString(state.getPeopleHaveQueued()),
+                        roundTime(state.getTimeInQueue()),
+                        Integer.toString(state.getCustomerQueue().size()),
+                        state.getCustomerQueue().toString());
+                System.out.println();
+            }
         }
     }
 
