@@ -5,18 +5,16 @@ import labb6.supermarket.ShopState;
 import java.util.Random;
 
 /**
- * This class is used to run different simulation in order to optimize.
+ * This class is used to run different simulation in order to optimize amount of registers.
  *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class Optimize {
 
     public static void main(String[] args) {
-
         final boolean metod2 = false;
-
         if (metod2) {
-            int[] results = optimizeSetSeed(K.SEED, true);
+            int[] results = optimizeSetSeedWithPrint(K.SEED);
             System.out.printf("Minsta antalet kassor som ger minimalt antal missade (%d): %d", results[1], results[0]);
 
         } else {
@@ -25,11 +23,11 @@ public class Optimize {
     }
 
     /**
-     * Metod 1 shop state.
+     * Simulates the supermarket simulation once with the parameters in {@link K}
      *
-     * @param maxRegisters the max registers.
-     * @param seed         the seed random integer used to randomize the simulation.
-     * @return the shop state
+     * @param maxRegisters the max amount of registers.
+     * @param seed         integer used in {@link Random} for random values in the simulation.
+     * @return the {@link ShopState} after the simulation is over.
      */
     public static ShopState simulateOnce(int maxRegisters, int seed) {
         RunSim r = new RunSim(
@@ -50,10 +48,11 @@ public class Optimize {
     }
 
     /**
-     * Metod 2 int [ ].
+     * Optimizes the lowest amount of registers needed
+     * to miss the least amount customers.
      *
-     * @param seed the seed
-     * @return the int [ ]
+     * @param seed seed used in {@link Random}
+     * @return an array of integers with length 2: {@code [lowestAmountOfRegisters, leastMissedPeople]}
      */
     public static int[] optimizeSetSeed(int seed) {
         int minRegs = 1;
@@ -65,19 +64,22 @@ public class Optimize {
         return new int[]{res[0], res[1]};
     }
 
-    public static int[] optimizeSetSeed(int seed, boolean withPrint) {
-        if (withPrint) {
-            System.out.println("\n" +
-                    "Max som ryms, M..........: " + K.M + "\n" +
-                    "Ankomshastighet, lambda..: " + K.L + "\n" +
-                    "Plocktider, [P_min..Pmax]: [" + K.LOW_COLLECTION_TIME + ".." + K.HIGH_COLLECTION_TIME + "]" + "\n" +
-                    "Betaltider, [K_min..Kmax]: [" + K.LOW_PAYMENT_TIME + ".." + K.HIGH_PAYMENT_TIME + "]" + "\n" +
-                    "Frö, f...................: " + seed + "\n"
-            );
+    /**
+     * Prints data regarding the simulation and calls {@link #optimizeSetSeed}.
+     * @param seed seed used in {@link Random}
+     * @return an array of integers with length 2: {@code [lowestAmountOfRegisters, leastMissedPeople]}
+     */
+    public static int[] optimizeSetSeedWithPrint(int seed) {
+        System.out.println("\n" +
+                "Max som ryms, M..........: " + K.M + "\n" +
+                "Ankomshastighet, lambda..: " + K.L + "\n" +
+                "Plocktider, [P_min..Pmax]: [" + K.LOW_COLLECTION_TIME + ".." + K.HIGH_COLLECTION_TIME + "]" + "\n" +
+                "Betaltider, [K_min..Kmax]: [" + K.LOW_PAYMENT_TIME + ".." + K.HIGH_PAYMENT_TIME + "]" + "\n" +
+                "Frö, f...................: " + seed + "\n"
+        );
 
-            System.out.printf("Stängning sker tiden %s och stophändelsen sker tiden %s", K.END_TIME, K.STOP_TIME);
-            System.out.println("\n");
-        }
+        System.out.printf("Stängning sker tiden %s och stophändelsen sker tiden %s", K.END_TIME, K.STOP_TIME);
+        System.out.println("\n");
         return optimizeSetSeed(seed);
     }
 
@@ -97,9 +99,11 @@ public class Optimize {
     }
 
     /**
-     * Metod 3.
+     * Optimizes the lowest amount of registers needed
+     * to miss the least amount customers without using
+     * set seed.
      *
-     * @param random the random
+     * @param random the random to be used
      */
     public static void optimizeRandom(Random random) {
         int counter = 0;

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 
 /**
- * This class Event queue  keeps track of the events with an Arraylist.
+ * Keeps track of all the future {@link Event}s to happen.
+ * Refer to {@link ArrayList} for more information.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class EventQueue extends ArrayList<Event> {
@@ -21,14 +22,13 @@ public class EventQueue extends ArrayList<Event> {
     }
 
     /**
-     * Appends the specified event to the end of this list.
+     * Appends the specified event and sorts the queue.
      *
-     * @param event the event to be appended to this list.
-     *
-     * @throws Error "xxx"
+     * @param event the event to be appended.
      */
     public void addEvent(Event event) {
         this.add(event);
+        // Sorts the queue based on the time the event will happen.
         sort((o1, o2) -> {
             double x = o1.getTime() - o2.getTime();
             if (x > 0) return 1;
@@ -38,7 +38,8 @@ public class EventQueue extends ArrayList<Event> {
     }
 
     /**
-     * Removes the event at the specified position in this list. Shifts any subsequent event to the left (subtracts one from their indices).
+     * Removes the event at the specified position in this list.
+     * Shifts any subsequent event to the left (subtracts one from their indices).
      *
      * @param index the index of the event to be removed
      * @return the event that was removed from the list

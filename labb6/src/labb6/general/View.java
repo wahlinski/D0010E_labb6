@@ -13,11 +13,14 @@ import java.util.Observer;
  */
 @SuppressWarnings("deprecation")
 
-public class View implements Observer {
+public abstract class View implements Observer {
 
+    /**
+     * Abstract method that is called each time an {@link Event} occurs.
+     *
+     * @param o     the observable object.
+     * @param arg   an argument passed to the {@code notifyObservers} method.
+     */
     @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
+    public abstract void update(Observable o, Object arg);
 }

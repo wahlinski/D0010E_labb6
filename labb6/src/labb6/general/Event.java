@@ -3,7 +3,8 @@ package labb6.general;
 import labb6.util.EventName;
 
 /**
- * An abstract class that can be expanded to specify which type of events occur in the simulation.
+ * An abstract class that can be extended to specify which type of events occur in the simulation.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class Event {
     protected double time;
@@ -13,9 +14,8 @@ public abstract class Event {
     /**
      * Instantiates a new Event.
      *
-     * @param eventQueue the event queue stored in an Arraylist.
+     * @param eventQueue the event queue.
      * @param time       the time for an event.
-     * @throws IllegalArgumentException if incorrect types are passed through.
      */
     public Event(EventQueue eventQueue, double time) {
         this.eventQueue = eventQueue;
@@ -23,7 +23,11 @@ public abstract class Event {
     }
 
     /**
-     * Execute by changing the State .
+     * Execute the event. Changes the state and marks it
+     * as updated which allows Observers (View) to update.
+     * <p>
+     *     When overriding, make sure to call {@code super.execute()} before anything else
+     * </p>
      *
      * @param state the state
      */
@@ -34,7 +38,7 @@ public abstract class Event {
     /**
      * Gets time for the event.
      *
-     * @return the time as an int
+     * @return the time as a double
      */
     public double getTime() {
         return this.time;

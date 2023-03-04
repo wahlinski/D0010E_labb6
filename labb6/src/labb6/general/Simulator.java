@@ -4,7 +4,7 @@
 package labb6.general;
 
 /**
- * The simulator is responsible for calling each event's execute method.
+ * The simulator is responsible for making sure every {@link Event} happens.
  *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
@@ -17,7 +17,6 @@ public abstract class Simulator {
      *
      * @param eventQueue the event queue stored in an Arraylist.
      * @param state      the state describes the current state.
-     * @throws IllegalArgumentException "xxx"
      */
     public Simulator(EventQueue eventQueue, State state) {
         this.eventQueue = eventQueue;
@@ -34,8 +33,8 @@ public abstract class Simulator {
     }
 
     /**
-     * Runs the simulator.
-     * @throws Error "XXXX"
+     * Runs the simulator until a stop event has occurred.
+     * @throws IndexOutOfBoundsException if there are no events to execute.
      */
     public void run() {
         while (!state.isStopped()) {

@@ -4,8 +4,8 @@
 package labb6.general;
 
 /**
- * This class inherits Event class. Only responsible for starting an Event
- *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * Responsible for starting a simulation.
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public class StartEvent extends Event {
 
@@ -14,12 +14,15 @@ public class StartEvent extends Event {
      *
      * @param eventQueue the event queue
      * @param time       the time
-     * @throws Error "xxx"
      */
     public StartEvent(EventQueue eventQueue, double time) {
         super(eventQueue, time);
     }
 
+    /**
+     * Begins the simulation.
+     * @param state the state
+     */
     @Override
     public void execute(State state) {
         super.execute(state);

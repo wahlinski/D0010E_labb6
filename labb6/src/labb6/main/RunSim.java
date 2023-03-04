@@ -19,7 +19,6 @@ public class RunSim {
     private ShopState state;
 
     /**
-     * Runs the specific simulator.
      *
      * @param maxRegisters max amount of open registers
      * @param maxInStore max number of customers allowed in the store
@@ -53,12 +52,7 @@ public class RunSim {
 
     }
 
-    /**
-     * Main.
-     *
-     * @param args the args
-     *             Prints the whole simulator in different stages???
-     */
+
     public static void main(String[] args) {
         final boolean firstTest = true;
         if (firstTest) {
@@ -73,7 +67,8 @@ public class RunSim {
     /**
      * Starts the simulator.
      *
-     * @param withView the with view???
+     * @param withView {@code true} if a {@link ShopView} should observe the state.
+     * @return the {@link ShopState} after the simulation is over.
      */
     public ShopState startSimulator(boolean withView) {
         if (withView) {

@@ -3,7 +3,7 @@ package labb6.general;
 import java.util.Observable;
 
 /**
- * State is a general class for the simulator to keep track of different states in the simulator.
+ * General class for keeping track of the different states during a simulation.
  *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
@@ -15,24 +15,22 @@ public abstract class State extends Observable {
     /**
      * Instantiates a new State.
      */
-
     public State() {
 
     }
 
     /**
-     * Get time double.
-     *
-     * @return the int time
+     * @return current time
      */
     public double getTime() {
         return this.currentTime;
     }
 
     /**
-     * Sets time.
+     * Sets the current time.
      *
      * @param time the time
+     * @throws RuntimeException if time < 0
      */
     public void setTime(double time) {
         if (time < getTime()) {
@@ -45,28 +43,26 @@ public abstract class State extends Observable {
     /**
      * Is stopped boolean.
      *
-     * @return the boolean
+     * @return true if a stop event has occurred, false otherwise.
      */
     public boolean isStopped() {
         return this.stopped;
     }
 
     /**
-     * Begin.
+     * Begins the simulation
      */
     public abstract void begin();
 
     /**
-     * Stop.
-     *
-     * @throws Error "Simulator already stopped"
+     * Stops the simulation
      */
     public void stop() {
         stopped = true;
     }
 
     /**
-     * Update.
+     * Notifies all observers that the state has updated
      */
     public void update(Event event) {
         setTime(event.getTime());
