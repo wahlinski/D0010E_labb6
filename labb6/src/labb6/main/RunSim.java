@@ -1,26 +1,29 @@
 package labb6.main;
-import labb6.generalSimulator.EventQueue;
-import labb6.generalSimulator.StopEvent;
-import labb6.supermarketSimulator.ShopSimulator;
-import labb6.supermarketSimulator.ShopState;
-import labb6.supermarketSimulator.ShopView;
-import labb6.supermarketSimulator.events.ShopCloseEvent;
-import labb6.supermarketSimulator.events.ShopOpenEvent;
+
+import labb6.general.EventQueue;
+import labb6.general.StopEvent;
+import labb6.supermarket.ShopSimulator;
+import labb6.supermarket.ShopState;
+import labb6.supermarket.ShopView;
+import labb6.supermarket.events.ShopCloseEvent;
+import labb6.supermarket.events.ShopOpenEvent;
 
 /**
  * Runs the specific simulator.
- *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ *
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 @SuppressWarnings("deprecation")
 public class RunSim {
     private EventQueue eventQueue;
     private ShopState state;
-    
+
     /**
      * Runs the specific simulator.
      *
-     * @param m         the m specifies max amount of customers in the store
-     * @param l         the l specifies the ArrivalTime speed lambda
+     * @param maxRegisters max amount of open registers
+     * @param maxInStore max number of customers allowed in the store
+     * @param lambda    arrival speed of customers
      * @param pMin      the p Min specifies minimum pickTime
      * @param pMax      the p max specifies the maximum pickTime
      * @param kMin      the k min specifies minimum PayTime
@@ -49,6 +52,24 @@ public class RunSim {
         );
 
     }
+
+    /**
+     * Main.
+     *
+     * @param args the args
+     *             Prints the whole simulator in different stages???
+     */
+    public static void main(String[] args) {
+        final boolean firstTest = true;
+        if (firstTest) {
+            RunSim runsim = new RunSim(2, 5, 1.0, 0.5, 1.0, 2.0, 3.0, 1234, 10.0, 999.0);
+            runsim.startSimulator(true);
+        } else {
+            RunSim runsim = new RunSim(2, 7, 3.0, 0.6, 0.9, 0.35, 0.6, 13, 8.0, 999.0);
+            runsim.startSimulator(true);
+        }
+    }
+
     /**
      * Starts the simulator.
      *
@@ -63,19 +84,5 @@ public class RunSim {
         ShopSimulator sim = new ShopSimulator(eventQueue, state);
         sim.run();
         return state;
-    }
-
-    /**
-     * Main.
-     *
-     * @param args the args
-     *  Prints the whole simulator in different stages???
-     */
-    public static void main(String[] args){
-        // testkör simulatorexempel 1 ur labbspecen
-
-        //Värdena är från Håkans, det är de variabler för första körningen av labb-specen.
-        RunSim runsim = new RunSim(2, 5, 1.0, 0.5, 1.0, 2.0, 3.0, 1234, 10.0, 999.0);
-        runsim.startSimulator(true);
     }
 }

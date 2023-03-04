@@ -1,10 +1,11 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.supermarketSimulator.events;
-import labb6.generalSimulator.EventQueue;
-import labb6.supermarketSimulator.Customer;
-import labb6.supermarketSimulator.ShopState;
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
+package labb6.supermarket.events;
+
+import labb6.general.EventQueue;
+import labb6.supermarket.Customer;
+import labb6.supermarket.ShopState;
 import labb6.util.EventName;
 
 
@@ -38,7 +39,7 @@ public class CustomerArrivesEvent extends CustomerEvent {
         CustomerArrivesEvent arrivesEvent = new CustomerArrivesEvent(eventQueue, state.getArrivalTime(), state.createCustomer());
         eventQueue.addEvent(arrivesEvent);
 
-        if(!state.canCustomerGoIn()) {
+        if (!state.canCustomerGoIn()) {
             // fullt i butiken
             state.addPersonMissed();
             return;

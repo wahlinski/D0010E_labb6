@@ -1,8 +1,9 @@
-package labb6.supermarketSimulator.events;
-import labb6.generalSimulator.Event;
-import labb6.generalSimulator.EventQueue;
-import labb6.generalSimulator.State;
-import labb6.supermarketSimulator.ShopState;
+package labb6.supermarket.events;
+
+import labb6.general.Event;
+import labb6.general.EventQueue;
+import labb6.general.State;
+import labb6.supermarket.ShopState;
 import labb6.util.EventName;
 
 /**

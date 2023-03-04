@@ -1,14 +1,14 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.generalSimulator;
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
+package labb6.general;
 
 /**
  * The simulator is responsible for calling each event's execute method.
  *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
-public abstract class Simulator{
+public abstract class Simulator {
     protected State state;
     protected EventQueue eventQueue;
 
@@ -19,7 +19,7 @@ public abstract class Simulator{
      * @param state      the state describes the current state.
      * @throws IllegalArgumentException "xxx"
      */
-    public Simulator(EventQueue eventQueue, State state){
+    public Simulator(EventQueue eventQueue, State state) {
         this.eventQueue = eventQueue;
         this.state = state;
     }
@@ -29,7 +29,7 @@ public abstract class Simulator{
      *
      * @return the state
      */
-    public State currentState(){
+    public State currentState() {
         return this.state;
     }
 

@@ -1,15 +1,16 @@
-package labb6.supermarketSimulator.events;
-import labb6.generalSimulator.Event;
-import labb6.generalSimulator.EventQueue;
-import labb6.generalSimulator.State;
-import labb6.supermarketSimulator.Customer;
-import labb6.supermarketSimulator.ShopState;
+package labb6.supermarket.events;
+
+import labb6.general.Event;
+import labb6.general.EventQueue;
+import labb6.general.State;
+import labb6.supermarket.Customer;
+import labb6.supermarket.ShopState;
 
 
 /**
  * This inherits the general Event class and creates a specific event for customers.
  *
- *  @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
+ * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 public abstract class CustomerEvent extends Event {
     protected Customer customer;
@@ -38,7 +39,7 @@ public abstract class CustomerEvent extends Event {
     @Override
     public void execute(State state) {
         super.execute(state);
-        if(state instanceof ShopState s) {
+        if (state instanceof ShopState s) {
             execute(s);
         }
     }

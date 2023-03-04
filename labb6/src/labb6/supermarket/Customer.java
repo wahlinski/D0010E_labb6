@@ -1,13 +1,12 @@
-package labb6.supermarketSimulator;
+package labb6.supermarket;
 
 /**
  * This class is for keeping track of customers this object called Custmer.
  *
  * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
- *
  */
-public class Customer{
-    
+public class Customer {
+
     private int customerID;
 
     /**
@@ -15,7 +14,7 @@ public class Customer{
      *
      * @param customerID the customer id unique identifier for each customer.
      */
-    public Customer(int customerID){
+    public Customer(int customerID) {
         this.customerID = customerID;
     }
 
@@ -24,7 +23,7 @@ public class Customer{
      *
      * @return the int customerID
      */
-    public int getCustomerID(){
+    public int getCustomerID() {
         return this.customerID;
     }
 }

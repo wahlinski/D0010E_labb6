@@ -1,7 +1,7 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.generalSimulator;
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
+package labb6.general;
 
 /**
  * This class inherits Event class. Only responsible for starting an Event

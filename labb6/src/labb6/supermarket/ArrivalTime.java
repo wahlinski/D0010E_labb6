@@ -1,9 +1,11 @@
-package labb6.supermarketSimulator;
+package labb6.supermarket;
+
 import labb6.util.ExponentialRandomStream;
 
 /**
  * This class calculates Arrival time for the customers in the store. Customers are considered to arrive randomly and independently
  * of each other.
+ *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class ArrivalTime {

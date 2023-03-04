@@ -1,17 +1,27 @@
 package labb6.main;
-import labb6.supermarketSimulator.ShopState;
-import labb6.util.K;
+
+import labb6.supermarket.ShopState;
+
 import java.util.Random;
 
 /**
  * This class is used to run different simulation in order to optimize.
+ *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */
 public class Optimize {
 
     public static void main(String[] args) {
-        //metod2(K.SEED);
-        metod3(new Random(K.SEED));
+
+        final boolean metod2 = false;
+
+        if (metod2) {
+            int[] results = optimizeSetSeed(K.SEED, true);
+            System.out.printf("Minsta antalet kassor som ger minimalt antal missade (%d): %d", results[1], results[0]);
+
+        } else {
+            optimizeRandom(new Random(K.SEED));
+        }
     }
 
     /**
@@ -21,7 +31,7 @@ public class Optimize {
      * @param seed         the seed random integer used to randomize the simulation.
      * @return the shop state
      */
-    public static ShopState metod1(int maxRegisters, int seed) {
+    public static ShopState simulateOnce(int maxRegisters, int seed) {
         RunSim r = new RunSim(
                 maxRegisters,
                 K.M,
@@ -35,6 +45,7 @@ public class Optimize {
                 K.STOP_TIME
         );
 
+
         return r.startSimulator(false);
     }
 
@@ -44,45 +55,39 @@ public class Optimize {
      * @param seed the seed
      * @return the int [ ]
      */
-    public static int[] metod2(int seed) {
+    public static int[] optimizeSetSeed(int seed) {
         int minRegs = 1;
         int maxRegs = K.M;
 
-        /* använder långsam sökning
-        ShopState state;
-        int leastMissed = metod1(maxRegs, seed).getPeopleMissed();
-        for(int i = maxRegs - 1; i >= minRegs; i--) {
-            state = metod1(i, seed);
-            if (state.getPeopleMissed() < leastMissed) {
-                optimalRegs = i;
-                leastMissed = state.getPeopleMissed();
-            }
-        }
-        */
-
-        int minMissed = metod1(maxRegs, seed).getPeopleMissed();
+        int minMissed = simulateOnce(maxRegs, seed).getPeopleMissed();
         int[] res = binarySearch(seed, minRegs, maxRegs, minRegs, minMissed);
 
+        return new int[]{res[0], res[1]};
+    }
 
+    public static int[] optimizeSetSeed(int seed, boolean withPrint) {
+        if (withPrint) {
+            System.out.println("\n" +
+                    "Max som ryms, M..........: " + K.M + "\n" +
+                    "Ankomshastighet, lambda..: " + K.L + "\n" +
+                    "Plocktider, [P_min..Pmax]: [" + K.LOW_COLLECTION_TIME + ".." + K.HIGH_COLLECTION_TIME + "]" + "\n" +
+                    "Betaltider, [K_min..Kmax]: [" + K.LOW_PAYMENT_TIME + ".." + K.HIGH_PAYMENT_TIME + "]" + "\n" +
+                    "Frö, f...................: " + seed + "\n"
+            );
 
-        /*System.out.println("Optimala:");
-        System.out.println("Kassor: " + res[0]);
-        System.out.println("Missade: " + res[1]);*/
-        return new int[] {res[0],res[1]};
+            System.out.printf("Stängning sker tiden %s och stophändelsen sker tiden %s", K.END_TIME, K.STOP_TIME);
+            System.out.println("\n");
+        }
+        return optimizeSetSeed(seed);
     }
 
     private static int[] binarySearch(int seed, int minRegs, int maxRegs, int bestRegs, int bestMissed) {
-
-
         int mid = (minRegs + maxRegs) / 2;
-        ShopState state = metod1(mid, seed);
-        // maxMissed --- state.missed --- minMissed
-        // minRegs --- mid --- maxRegs
+        ShopState state = simulateOnce(mid, seed);
 
         int missed = state.getPeopleMissed();
-        //System.out.println(minRegs + " | " + mid + " | " + maxRegs + " | " + bestRegs + " | " + missed + " | " + bestMissed);
         if (maxRegs == mid || minRegs == mid) {
-            return new int[] { bestRegs, bestMissed };
+            return new int[]{bestRegs, bestMissed};
         }
 
         if (missed > bestMissed) {
@@ -96,20 +101,19 @@ public class Optimize {
      *
      * @param random the random
      */
-    public static void metod3(Random random) {
+    public static void optimizeRandom(Random random) {
         int counter = 0;
-        int[] first = metod2(random.nextInt());
-        while (counter < 100){
-            int comperable = metod2(random.nextInt())[0];
-            if (first[0] > comperable){
+        int[] first = optimizeSetSeed(random.nextInt());
+        while (counter < 100) {
+            int comperable = optimizeSetSeed(random.nextInt())[0];
+            if (first[0] > comperable) {
                 counter++;
-                System.out.println(counter);
             } else {
                 first[0] = comperable;
                 counter = 0;
             }
         }
-        System.out.println("Kassor: " + Integer.toString(first[0]) + " Missade kunder: " + Integer.toString(first[1]));
+        System.out.println("Kassor: " + Integer.toString(first[0]) + ", Missade kunder: " + Integer.toString(first[1]));
     }
 
 }

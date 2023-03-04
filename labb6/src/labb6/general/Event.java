@@ -1,4 +1,5 @@
-package labb6.generalSimulator;
+package labb6.general;
+
 import labb6.util.EventName;
 
 /**
@@ -16,7 +17,7 @@ public abstract class Event {
      * @param time       the time for an event.
      * @throws IllegalArgumentException if incorrect types are passed through.
      */
-    public Event(EventQueue eventQueue, double time){
+    public Event(EventQueue eventQueue, double time) {
         this.eventQueue = eventQueue;
         this.time = time;
     }
@@ -35,7 +36,7 @@ public abstract class Event {
      *
      * @return the time as an int
      */
-    public double getTime(){
+    public double getTime() {
         return this.time;
     }
 
@@ -49,21 +50,21 @@ public abstract class Event {
     }
 
     /**
-     * Sets EventName.
-     *
-     * @param name the name of the event
-     */
-    protected void setName(EventName name) {
-        this.name = name;
-    }
-
-    /**
      * Gets name of the event.
      *
      * @return the EventName.
      */
     public EventName getName() {
         return name;
+    }
+
+    /**
+     * Sets EventName.
+     *
+     * @param name the name of the event
+     */
+    protected void setName(EventName name) {
+        this.name = name;
     }
 
     public String toString() {

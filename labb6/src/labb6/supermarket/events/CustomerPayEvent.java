@@ -1,12 +1,12 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.supermarketSimulator.events;
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
+package labb6.supermarket.events;
 
-import labb6.generalSimulator.EventQueue;
-import labb6.supermarketSimulator.Customer;
-import labb6.supermarketSimulator.CustomerQueue;
-import labb6.supermarketSimulator.ShopState;
+import labb6.general.EventQueue;
+import labb6.supermarket.Customer;
+import labb6.supermarket.CustomerQueue;
+import labb6.supermarket.ShopState;
 import labb6.util.EventName;
 
 /**
@@ -36,7 +36,7 @@ public class CustomerPayEvent extends CustomerEvent {
         state.freeUpRegister();
 
         CustomerQueue queue = state.getCustomerQueue();
-        if(queue.size() > 0) {
+        if (queue.size() > 0) {
             Customer customer = queue.first();
             queue.removeFirst();
             CustomerPayEvent payEvent = new CustomerPayEvent(eventQueue, state.getPayTime(), customer);

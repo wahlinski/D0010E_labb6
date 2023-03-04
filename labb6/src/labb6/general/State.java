@@ -1,4 +1,5 @@
-package labb6.generalSimulator;
+package labb6.general;
+
 import java.util.Observable;
 
 /**
@@ -7,26 +8,27 @@ import java.util.Observable;
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
 @SuppressWarnings("deprecation")
-public abstract class State extends Observable{
+public abstract class State extends Observable {
     private double currentTime;
     private boolean stopped;
 
     /**
      * Instantiates a new State.
      */
-     
-    public State(){
+
+    public State() {
 
     }
-    
-     /**
+
+    /**
      * Get time double.
      *
      * @return the int time
      */
-    public double getTime(){
+    public double getTime() {
         return this.currentTime;
     }
+
     /**
      * Sets time.
      *
@@ -45,7 +47,7 @@ public abstract class State extends Observable{
      *
      * @return the boolean
      */
-    public boolean isStopped(){
+    public boolean isStopped() {
         return this.stopped;
     }
 
@@ -56,14 +58,15 @@ public abstract class State extends Observable{
 
     /**
      * Stop.
+     *
      * @throws Error "Simulator already stopped"
      */
     public void stop() {
         stopped = true;
     }
+
     /**
      * Update.
-     *
      */
     public void update(Event event) {
         setTime(event.getTime());

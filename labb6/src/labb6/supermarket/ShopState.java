@@ -1,8 +1,9 @@
-package labb6.supermarketSimulator;
-import labb6.generalSimulator.Event;
-import labb6.generalSimulator.State;
-import labb6.generalSimulator.StopEvent;
-import labb6.supermarketSimulator.events.CustomerPayEvent;
+package labb6.supermarket;
+
+import labb6.general.Event;
+import labb6.general.State;
+import labb6.general.StopEvent;
+import labb6.supermarket.events.CustomerPayEvent;
 
 /**
  * This class defines the state of the shop.
@@ -56,7 +57,7 @@ public class ShopState extends State {
 
     @Override
     public void update(Event event) {
-        if(event instanceof StopEvent) { // if (event.getName() == EventName.STOP) {
+        if (event instanceof StopEvent) {
             super.update(event);
             return;
         }
@@ -65,14 +66,16 @@ public class ShopState extends State {
 
         // räkna ut oanvänd kassatid
         int open = openRegisters();
-        timeRegistersNotUsed += diffTime * open;
+        if (isOpen() || peopleInStore > 0) {
+            timeRegistersNotUsed += diffTime * open;
+        }
 
         // räkna ut kötid
         int inQueue = customerQueue.size();
         timeInQueue += diffTime * inQueue;
 
         //
-        if (event instanceof CustomerPayEvent){
+        if (event instanceof CustomerPayEvent) {
             this.lastCustomerPayedTime = event.getTime();
         }
 
@@ -175,6 +178,7 @@ public class ShopState extends State {
 
     /**
      * Allows more people to enter the store.
+     *
      * @throws RuntimeException if peopleInStore >= maxPeopleInStore.
      */
     public void addPeopleInStore() {
@@ -186,6 +190,7 @@ public class ShopState extends State {
 
     /**
      * Decreses the number of people in the store.
+     *
      * @throws RuntimeException if peopleInStore {@literal <=} 0
      */
     public void personLeftStore() {
@@ -296,7 +301,7 @@ public class ShopState extends State {
      *
      * @return the double
      */
-    public double getCustomerLastPayedTime(){
+    public double getCustomerLastPayedTime() {
         return this.lastCustomerPayedTime;
     }
 

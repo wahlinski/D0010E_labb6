@@ -1,11 +1,13 @@
-package labb6.generalSimulator;
+package labb6.general;
+
 import labb6.util.EventName;
 
 /**
  * This class inherits Event class. Only responsible for stopping an Event
+ *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
-public class StopEvent extends Event{
+public class StopEvent extends Event {
     /**
      * Instantiates a new Stop event.
      *

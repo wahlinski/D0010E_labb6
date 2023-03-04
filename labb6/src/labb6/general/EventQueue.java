@@ -1,8 +1,9 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
 
-package labb6.generalSimulator;
+package labb6.general;
+
 import java.util.ArrayList;
 
 
@@ -10,13 +11,13 @@ import java.util.ArrayList;
  * This class Event queue  keeps track of the events with an Arraylist.
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander
  */
-public class EventQueue extends ArrayList<Event>{
+public class EventQueue extends ArrayList<Event> {
 
     /**
      * Instantiates a new Event queue.
      */
-    public EventQueue(){
-       super();
+    public EventQueue() {
+        super();
     }
 
     /**
@@ -26,7 +27,7 @@ public class EventQueue extends ArrayList<Event>{
      *
      * @throws Error "xxx"
      */
-    public void addEvent(Event event){
+    public void addEvent(Event event) {
         this.add(event);
         sort((o1, o2) -> {
             double x = o1.getTime() - o2.getTime();
@@ -43,7 +44,7 @@ public class EventQueue extends ArrayList<Event>{
      * @return the event that was removed from the list
      * @throws IndexOutOfBoundsException  if the index is out of range (index < 0 || index >= size())
      */
-    public Event removeEvent(int index){
+    public Event removeEvent(int index) {
         return this.remove(index);
     }
 
@@ -54,7 +55,7 @@ public class EventQueue extends ArrayList<Event>{
      * @return the event at the specified position in this list
      * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
      */
-    public Event getEvent(int index){
+    public Event getEvent(int index) {
         return this.get(index);
     }
 }

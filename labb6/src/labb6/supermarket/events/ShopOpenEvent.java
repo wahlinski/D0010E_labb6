@@ -1,12 +1,12 @@
 /**
-* @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
-*/
-package labb6.supermarketSimulator.events;
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
+ */
+package labb6.supermarket.events;
 
-import labb6.generalSimulator.EventQueue;
-import labb6.generalSimulator.StartEvent;
-import labb6.generalSimulator.State;
-import labb6.supermarketSimulator.ShopState;
+import labb6.general.EventQueue;
+import labb6.general.StartEvent;
+import labb6.general.State;
+import labb6.supermarket.ShopState;
 import labb6.util.EventName;
 
 /**
