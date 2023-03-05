@@ -11,6 +11,7 @@ import labb6.util.EventName;
 
 /**
  * This class keeps track of when the store is open.
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
  */
 public class ShopOpenEvent extends StartEvent {
     /**

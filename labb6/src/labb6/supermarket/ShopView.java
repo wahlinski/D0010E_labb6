@@ -68,7 +68,7 @@ public class ShopView extends View {
      * @param o   the o
      * @param arg the arg
      */
-    public void infoPrinter(Observable o, Object arg) {
+    private void infoPrinter(Observable o, Object arg) {
         if (arg instanceof StopEvent) {
             System.out.printf("%-10.10s  %-15.15s",
                     roundTime(((ShopState) o).getTime()),
@@ -153,6 +153,11 @@ public class ShopView extends View {
         }
     }
 
+    /**
+     * Prints information.
+     * @param o     the observable object.
+     * @param arg   an argument passed to the {@code notifyObservers} method.
+     */
     @Override
     public void update(Observable o, Object arg) {
 

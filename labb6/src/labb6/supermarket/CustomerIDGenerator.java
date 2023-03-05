@@ -19,20 +19,9 @@ public class CustomerIDGenerator {
      * Gets a new customerID.
      *
      * @return New CustomerID
-     * @throws ArithmeticException if currentId < 0
      */
     public int getNewID() {
         this.currentID++;
-        return this.currentID - 1;
-    }
-
-    /**
-     * Gets a customerId.
-     *
-     * @return int
-     * @throws ArithmeticException if currentId < 0
-     */
-    public int getID() {
         return this.currentID - 1;
     }
 }

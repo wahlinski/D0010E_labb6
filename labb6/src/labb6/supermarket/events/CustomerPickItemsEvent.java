@@ -11,6 +11,7 @@ import labb6.util.EventName;
 
 /**
  * This class keeps track of when customer has finished picking items.
+ * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
  */
 public class CustomerPickItemsEvent extends CustomerEvent {
 

@@ -1,7 +1,7 @@
 package labb6.util;
 
 /**
- * The Enumeration EventName handels important Events and makes them more accessible .
+ * Makes the names of events more accessible.
  *
  * @author Abdi Abdi, Viggo Härdelin, Filip Wåhlin, Samuel Melander.
  */

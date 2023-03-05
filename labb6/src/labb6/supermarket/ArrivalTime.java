@@ -31,7 +31,6 @@ public class ArrivalTime {
      *
      * @param currentTime currentTime in State
      * @return Returns the absolute time for the event to happen.
-     * @throws Error "xxx"
      */
     public double calculate(double currentTime) {
         return currentTime + rand.next();

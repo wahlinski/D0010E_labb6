@@ -1,7 +1,7 @@
 package labb6.supermarket;
 
 /**
- * This class is for keeping track of customers this object called Custmer.
+ * This class is for keeping track of customers this object called Customer.
  *
  * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
  */

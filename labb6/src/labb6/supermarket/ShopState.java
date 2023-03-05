@@ -55,6 +55,11 @@ public class ShopState extends State {
         idGenerator = new CustomerIDGenerator();
     }
 
+    /**
+     * Calculates the time customers has been in queue and
+     * the time registers has been unused.
+     * @param event the event that occurred
+     */
     @Override
     public void update(Event event) {
         if (event instanceof StopEvent) {
@@ -82,6 +87,9 @@ public class ShopState extends State {
         super.update(event);
     }
 
+    /**
+     * Opens the store
+     */
     public void begin() {
         storeOpened = true;
     }
@@ -96,45 +104,42 @@ public class ShopState extends State {
     }
 
     /**
-     * Checks if the store is closed.
+     * Closes the shop.
      */
     public void closeShop() {
         storeOpened = false;
     }
 
     /**
-     * Open registers int.
+     * Gets the amount of open registers
      *
-     * @return mängden tillgängliga kassor
-     * @throws Error store is not open??
+     * @return the amount of open registers
      */
     public int openRegisters() {
         return unusedRegisters;
     }
 
     /**
-     * Makes sure that Registers are occupied.
+     * Occupies a register.
      *
-     * <p><b>viktigt!</b> kolla så det finns tillgängliga kassor</p>
-     *
-     * @throws RuntimeException if the unusedRegisters {@literal <} 1
+     * @throws RuntimeException if {@link #openRegisters()} < 1
      */
-    public void occupyRegister() {
+    public void occupyRegister() throws RuntimeException {
         if (unusedRegisters < 1) {
-            throw new RuntimeException("finns inga fria kassor, använd openRegisters() före");
+            throw new RuntimeException("There are no available registers.");
         }
 
         unusedRegisters -= 1;
     }
 
     /**
-     * Opens up new Register
+     * Opens up a used register.
      *
-     * @throws RuntimeException if unusedRegisters {@literal >=} maxRegisters
+     * @throws RuntimeException if {@link #openRegisters()} >= {@link #getMaxRegisters()}
      */
-    public void freeUpRegister() {
+    public void freeUpRegister() throws RuntimeException {
         if (unusedRegisters >= maxRegisters) {
-            throw new RuntimeException("kan inte fria en ny kassa eftersom alla är oanvända");
+            throw new RuntimeException("None of the registers are being used.");
         }
 
         unusedRegisters += 1;
@@ -143,7 +148,7 @@ public class ShopState extends State {
     /**
      * Returns maximum amount of registers.
      *
-     * @return the max registers
+     * @return the max amount of registers.
      */
     public int getMaxRegisters() {
         return maxRegisters;
@@ -152,7 +157,7 @@ public class ShopState extends State {
     /**
      * Returns maximum people in store.
      *
-     * @return the max people in store of the type int
+     * @return the max people in store.
      */
     public int getMaxPeopleInStore() {
         return maxPeopleInStore;
@@ -161,7 +166,7 @@ public class ShopState extends State {
     /**
      * Returns number of people in the store.
      *
-     * @return the people in store of the type int.
+     * @return the people in store.
      */
     public int getPeopleInStore() {
         return peopleInStore;
@@ -170,55 +175,53 @@ public class ShopState extends State {
     /**
      * Checks if more people are allowed to enter the store.
      *
-     * @return the boolean
+     * @return {@code true} if another customer can enter.
      */
     public boolean canCustomerGoIn() {
         return getMaxPeopleInStore() > getPeopleInStore();
     }
 
     /**
-     * Allows more people to enter the store.
+     * Allows another customer to enter the store.
      *
-     * @throws RuntimeException if peopleInStore >= maxPeopleInStore.
+     * @throws RuntimeException if there already are max amount of people in the store.
      */
-    public void addPeopleInStore() {
+    public void addPeopleInStore() throws RuntimeException {
         if (peopleInStore >= maxPeopleInStore) {
-            throw new RuntimeException("för många i butiken");
+            throw new RuntimeException("Maximum number of customers already.");
         }
         peopleInStore += 1;
     }
 
     /**
-     * Decreses the number of people in the store.
+     * Decreases the number of people in the store.
      *
-     * @throws RuntimeException if peopleInStore {@literal <=} 0
+     * @throws RuntimeException if there are no customers in the store.
      */
     public void personLeftStore() {
         if (peopleInStore <= 0) {
-            throw new RuntimeException("ingen som kan gå ut");
+            throw new RuntimeException("Store is empty.");
         }
 
         peopleInStore -= 1;
     }
 
     /**
-     * Counts the number of people missed.
+     * Adds another person missed.
      */
     public void addPersonMissed() {
         peopleMissed += 1;
     }
 
     /**
-     * Counts number of people paid.
+     * Adds another person paid.
      */
     public void addPersonPaid() {
         peoplePaid += 1;
     }
 
     /**
-     * Counts the number of people queued.
-     *
-     * @return the people paid
+     * Adds number of people queued in total.
      */
     public void addPeopleHaveQueued() {
         this.peopleQueued++;
@@ -252,16 +255,16 @@ public class ShopState extends State {
     }
 
     /**
-     * Returns the customer queue of type ArrayList
+     * Returns the customer queue.
      *
-     * @return the customer queue
+     * @return the customer queue.
      */
     public CustomerQueue getCustomerQueue() {
         return customerQueue;
     }
 
     /**
-     * Creates a new Customer Object.
+     * Creates a new customer.
      *
      * @return the customer with a unique CustomerID
      */
@@ -297,25 +300,12 @@ public class ShopState extends State {
     }
 
     /**
-     * Returns the last customers' pay time.
+     * Returns the time the last customer paid.
      *
-     * @return the double
+     * @return the time the last customer paid.
      */
     public double getCustomerLastPayedTime() {
         return this.lastCustomerPayedTime;
-    }
-
-    /**
-     * Used to calculate duration of the unused registers.
-     *
-     * @param time the time
-     */
-    public void addTimeRegistersUnused(double time) {
-        if (time < 0) {
-            throw new RuntimeException("kan inte ta bort tid som kassor varit oanvända");
-        }
-
-        timeRegistersNotUsed += time;
     }
 
     /**
@@ -328,19 +318,6 @@ public class ShopState extends State {
     }
 
     /**
-     * Used to calculate time spent in the queue.
-     *
-     * @param time the time
-     */
-    public void addTimeInQueue(double time) {
-        if (time < 0) {
-            throw new RuntimeException("kan inte ta bort tid som folk har stått i kassakön");
-        }
-
-        timeInQueue += time;
-    }
-
-    /**
      * Returns the total time spent in the queue
      *
      * @return the time in queue
@@ -349,11 +326,10 @@ public class ShopState extends State {
         return timeInQueue;
     }
 
-
     /**
      * Returns the average number of customers arriving per unit of time.
      *
-     * @return the double lambda
+     * @return the arrival time lambda
      */
     public double lambda() {
         return arrivalTime.getLambda();
@@ -362,7 +338,7 @@ public class ShopState extends State {
     /**
      * Returns the random integer used to randomize the simulation for ArrivalTime.
      *
-     * @return the long
+     * @return the seed
      */
     public long seed() {
         return arrivalTime.getSeed();
@@ -371,7 +347,7 @@ public class ShopState extends State {
     /**
      * Returns minimum pickTime.
      *
-     * @return the double
+     * @return minimum pickTime.
      */
     public double pMin() {
         return pickTime.getPMin();
@@ -380,7 +356,7 @@ public class ShopState extends State {
     /**
      * Returns maximum pickTime.
      *
-     * @return the double
+     * @return maximum pickTime.
      */
     public double pMax() {
         return pickTime.getPMax();
@@ -389,7 +365,7 @@ public class ShopState extends State {
     /**
      * Returns minimum payTime.
      *
-     * @return the double
+     * @return minimum payTime.
      */
     public double kMin() {
         return payTime.getKMin();
@@ -398,10 +374,10 @@ public class ShopState extends State {
     /**
      * Returns maximum payTime.
      *
-     * @return the double
+     * @return maximum payTime.
      */
     public double kMax() {
-        return pickTime.getPMax();
+        return payTime.getKMax();
     }
 
 }
