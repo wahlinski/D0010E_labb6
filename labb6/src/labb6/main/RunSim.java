@@ -29,7 +29,7 @@ public class RunSim {
      * @param kMax      the k max specifies maximum PayTime
      * @param seed      the seed is an array of numbers used by RandomStream
      * @param closeTime the close time specifies when to close the store
-     * @param stopTime  the stop time specifies when to stop the time ???
+     * @param stopTime  the stop time specifies when to stop
      */
     public RunSim(int maxRegisters, int maxInStore, double lambda, double pMin, double pMax, double kMin, double kMax, int seed, double closeTime, double stopTime) {
 

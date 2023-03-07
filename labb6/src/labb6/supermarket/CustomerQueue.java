@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class CustomerQueue extends ArrayList<Customer> {
     private ShopState state;
 
+    /**
+     * Instantiates a new Customer queue.
+     *
+     * @param state the state
+     */
     public CustomerQueue(ShopState state) {
         super();
         this.state = state;

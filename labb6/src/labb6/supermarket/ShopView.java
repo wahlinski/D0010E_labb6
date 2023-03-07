@@ -6,7 +6,6 @@ import labb6.general.StopEvent;
 import labb6.general.View;
 import labb6.supermarket.events.CustomerEvent;
 import labb6.supermarket.events.ShopCloseEvent;
-
 import java.util.Observable;
 
 

@@ -30,7 +30,7 @@ public abstract class State extends Observable {
      * Sets the current time.
      *
      * @param time the time
-     * @throws RuntimeException if time < 0
+     * @throws RuntimeException if time {@literal <} 0
      */
     public void setTime(double time) {
         if (time < getTime()) {

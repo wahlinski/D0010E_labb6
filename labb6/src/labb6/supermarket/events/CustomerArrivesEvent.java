@@ -1,8 +1,4 @@
-/**
- * @author Wåhlin Filip, Abdi Abdi Mohamed, Härdelin Viggo, Melander Samuel
- */
 package labb6.supermarket.events;
-
 import labb6.general.EventQueue;
 import labb6.supermarket.Customer;
 import labb6.supermarket.ShopState;

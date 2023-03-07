@@ -122,7 +122,7 @@ public class ShopState extends State {
     /**
      * Occupies a register.
      *
-     * @throws RuntimeException if {@link #openRegisters()} < 1
+     * @throws RuntimeException if {@link #openRegisters()} {@literal <} 1
      */
     public void occupyRegister() throws RuntimeException {
         if (unusedRegisters < 1) {
