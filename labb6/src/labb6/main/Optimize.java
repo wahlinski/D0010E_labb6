@@ -30,7 +30,7 @@ public class Optimize {
      * @return the {@link ShopState} after the simulation is over.
      */
     public static ShopState simulateOnce(int maxRegisters, int seed) {
-        RunSim r = new RunSim(
+        RunSim run = new RunSim(
                 maxRegisters,
                 K.M,
                 K.L,
@@ -44,7 +44,7 @@ public class Optimize {
         );
 
 
-        return r.startSimulator(false);
+        return run.startSimulator(false);
     }
 
     /**
