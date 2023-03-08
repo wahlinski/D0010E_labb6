@@ -1,6 +1,6 @@
 package labb6.general;
 
-import labb6.util.EventName;
+import labb6.supermarket.EventName;
 
 /**
  * Responsible for stopping a simulation.

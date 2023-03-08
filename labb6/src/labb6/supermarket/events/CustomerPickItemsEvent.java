@@ -4,7 +4,7 @@ import labb6.general.EventQueue;
 import labb6.supermarket.Customer;
 import labb6.supermarket.CustomerQueue;
 import labb6.supermarket.ShopState;
-import labb6.util.EventName;
+import labb6.supermarket.EventName;
 
 /**
  * This class keeps track of when customer has finished picking items.

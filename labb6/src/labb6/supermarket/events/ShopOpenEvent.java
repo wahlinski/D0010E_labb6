@@ -4,7 +4,7 @@ import labb6.general.EventQueue;
 import labb6.general.StartEvent;
 import labb6.general.State;
 import labb6.supermarket.ShopState;
-import labb6.util.EventName;
+import labb6.supermarket.EventName;
 
 /**
  * This class keeps track of when the store is open.

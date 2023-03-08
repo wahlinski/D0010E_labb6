@@ -1,6 +1,6 @@
 package labb6.general;
 
-import labb6.util.EventName;
+import labb6.supermarket.EventName;
 
 /**
  * An abstract class that can be extended to specify which type of events occur in the simulation.

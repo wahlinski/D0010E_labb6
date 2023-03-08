@@ -2,7 +2,7 @@ package labb6.supermarket.events;
 import labb6.general.EventQueue;
 import labb6.supermarket.Customer;
 import labb6.supermarket.ShopState;
-import labb6.util.EventName;
+import labb6.supermarket.EventName;
 
 
 /**
