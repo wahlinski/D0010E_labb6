@@ -109,11 +109,12 @@ public class Optimize {
         int counter = 0;
         int[] first = optimizeSetSeed(random.nextInt());
         while (counter < 100) {
-            int comperable = optimizeSetSeed(random.nextInt())[0];
-            if (first[0] > comperable) {
+            int[] comperable = optimizeSetSeed(random.nextInt());
+            if (first[0] > comperable[0]) {
                 counter++;
             } else {
-                first[0] = comperable;
+                first[0] = comperable[0];
+                first[1] = comperable[1];
                 counter = 0;
             }
         }
