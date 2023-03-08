@@ -43,7 +43,7 @@ public class ShopView extends View {
                     "FÖRLOPP\n" +
                     "=======");
 
-            System.out.println(String.format("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+            System.out.println(String.format("%-10.10s  %-15.15s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10s",
                     "Tid",
                     "Händelse",
                     "Kund",
@@ -56,7 +56,7 @@ public class ShopView extends View {
                     "köat",
                     "köT",
                     "köar",
-                    "[Kassakö..]"
+                    "     [Kassakö..]"
             ));
         }
     }
@@ -111,7 +111,7 @@ public class ShopView extends View {
             }
             //Detta krävs då Det krävs en specifik println när händelsen är ShopCloseEvent (Den ska ej printa ut en customerID).
             if (arg instanceof ShopCloseEvent) {
-                System.out.printf("%-10.10s  %-15.15s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+                System.out.printf("%-10.10s  %-15.15s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %-15s",
                         roundTime(event.getTime()),
                         event,
                         "---",
@@ -124,7 +124,7 @@ public class ShopView extends View {
                         Integer.toString(state.getPeopleHaveQueued()),
                         roundTime(state.getTimeInQueue()),
                         Integer.toString(state.getCustomerQueue().size()),
-                        state.getCustomerQueue().toString());
+                        "     " + state.getCustomerQueue().toString());
                 System.out.println();
             } else if (arg instanceof StartEvent) {
                 System.out.printf("%-10.10s  %-17.14s",
@@ -133,7 +133,7 @@ public class ShopView extends View {
                 );
                 System.out.println();
             } else {
-                System.out.printf("%-10.10s  %-17.14s %-8.11s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10.10s %-10s",
+                System.out.printf("%-10.10s  %-17.14s %8.11s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %10.10s %-15s",
                         roundTime(event.getTime()),
                         event,
                         id,
@@ -146,7 +146,7 @@ public class ShopView extends View {
                         Integer.toString(state.getPeopleHaveQueued()),
                         roundTime(state.getTimeInQueue()),
                         Integer.toString(state.getCustomerQueue().size()),
-                        state.getCustomerQueue().toString());
+                        "     " + state.getCustomerQueue().toString());
                 System.out.println();
             }
         }
