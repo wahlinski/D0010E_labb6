@@ -1,4 +1,4 @@
-package labb6.util;
+package labb6.supermarket;
 
 /**
  * Makes the names of events more accessible.
