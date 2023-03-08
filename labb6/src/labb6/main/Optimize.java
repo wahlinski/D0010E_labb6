@@ -12,7 +12,7 @@ import java.util.Random;
 public class Optimize {
 
     public static void main(String[] args) {
-        final boolean metod2 = false;
+        final boolean metod2 = true;
         if (metod2) {
             int[] results = optimizeSetSeedWithPrint(K.SEED);
             System.out.printf("Minsta antalet kassor som ger minimalt antal missade (%d): %d", results[1], results[0]);

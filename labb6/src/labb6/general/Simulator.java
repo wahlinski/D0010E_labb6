@@ -38,9 +38,9 @@ public abstract class Simulator {
      */
     public void run() {
         while (!state.isStopped()) {
-            Event e = eventQueue.getEvent(0);
+            Event event = eventQueue.getEvent(0);
             eventQueue.removeEvent(0);
-            e.execute(state);
+            event.execute(state);
         }
     }
 }
